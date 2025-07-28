@@ -1850,13 +1850,7 @@ var fixedMenu = true,
     <div id="loadingOverlay">Loading Channel...</div>
     <video id="liveVideo" autoplay playsinline></video>
     <div class="live-badge"> 🔵 LIVE.......</div>
-    <div class="controls">
-      <button class="control-btn" onclick="cycleZoom()">🔁</button>
-      <button class="control-btn" onclick="toggleFullscreen()">&#9974;</button>
-      <button class="control-btn" onclick="togglePiP()">📺</button>
-      <button class="mute-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
-      <select class="quality-select" id="qualityMenu"><option />Loading...</select>
-</script>
+
     </div>
   </div>
 
@@ -1865,7 +1859,13 @@ var fixedMenu = true,
     <button onclick="filterCategory('INDIAN', event)">INDIAN</button>
     <button onclick="filterCategory('SPORTS', event)">SPORTS</button>
     <button class="dark-toggle" onclick="toggleDarkMode()"></button>
-	<div id="datetime"></div>
+    <button class="control-btn" onclick="cycleZoom()">🔁</button>
+    <button class="control-btn" onclick="toggleFullscreen()">&#9974;</button>
+    <button class="control-btn" onclick="togglePiP()">📺</button>
+    <button class="mute-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
+    <select class="quality-select" id="qualityMenu"><option />Loading...</select>
+    <div id="datetime"></div>
+	  
 
  <style>
     #datetime {
@@ -1921,13 +1921,13 @@ var fixedMenu = true,
     let currentChannelUrl = null;
 
     const channels = [
-     { name: "T Play", url: "https://cloudfrontnet.vercel.app/tplay/playout/209587/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJgmm6KFSPHFm6DoV6ubV_xciWySkkHCoqwGzLfc-nk-RCzg2T_J1j0nK415N0IHwlkIfUE5QqYfcJecIoZhgKIdrZYsuKumHNZu1tPL24Evvqdcb68wHAZNu25NUiDmhukteU4ld0Wll3U9p4SlsXUSUMw7bgahkcoz9NgRCrrIGQcKiENy9mfy75z4I/s1600/NadimRazaTV%20154215.png", category: "BANGLA" },
+{ name: "T Play", url: "https://cloudfrontnet.vercel.app/tplay/playout/209587/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJgmm6KFSPHFm6DoV6ubV_xciWySkkHCoqwGzLfc-nk-RCzg2T_J1j0nK415N0IHwlkIfUE5QqYfcJecIoZhgKIdrZYsuKumHNZu1tPL24Evvqdcb68wHAZNu25NUiDmhukteU4ld0Wll3U9p4SlsXUSUMw7bgahkcoz9NgRCrrIGQcKiENy9mfy75z4I/s1600/NadimRazaTV%20154215.png", category: "BANGLA" },
       
       
-   { name: "BanglaWaz", url: "https://cloudfrontnet.vercel.app/tplay/playout/209617/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg29l_5RPj9sCjISPOeVxEzrz2NNj4hsplyU-jb4_cNN1WuVrxxxhwX4dD2xV0pXSsou9bEXBflg7IOFGx4gV69cZG0Gi96i1YTlgt9VkPiJ_SVCnWKzz-gtVZJwxe4CuXNgvPjAUa34HPSsYL95V6CyNTxMzPwPsurRHvaAY5VyUVxN60gL1udsSUFJOo/s1600/NadimRazaTV%2012456.png", category: "BANGLA" },
+{ name: "BanglaWaz", url: "https://cloudfrontnet.vercel.app/tplay/playout/209617/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg29l_5RPj9sCjISPOeVxEzrz2NNj4hsplyU-jb4_cNN1WuVrxxxhwX4dD2xV0pXSsou9bEXBflg7IOFGx4gV69cZG0Gi96i1YTlgt9VkPiJ_SVCnWKzz-gtVZJwxe4CuXNgvPjAUa34HPSsYL95V6CyNTxMzPwPsurRHvaAY5VyUVxN60gL1udsSUFJOo/s1600/NadimRazaTV%2012456.png", category: "BANGLA" },
       
       
-   { name: "NatokBD", url: "https://cloudfrontnet.vercel.app/tplay/playout/209593/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiG7AA6JoJfhE07FTDgEoKr7lg66z3kVVf0K_V0tW-_3ZZzVWLtVNQbEnbOeQulkks6aoPtydJpw1Rj_8jkhTa1QSvwz2SGqZ8bDsbnZEpQBbZ4MXKWTe4AM8jRMd-tmd8jqFHTaEEw9SKNK1-FFVAwMn9fkvsOQ-JYNZnWD9T7FgI-lJsQBoTrzcuAoNM/s1600/NadimRazaT554547.png", category: "BANGLA" },
+{ name: "NatokBD", url: "https://cloudfrontnet.vercel.app/tplay/playout/209593/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiG7AA6JoJfhE07FTDgEoKr7lg66z3kVVf0K_V0tW-_3ZZzVWLtVNQbEnbOeQulkks6aoPtydJpw1Rj_8jkhTa1QSvwz2SGqZ8bDsbnZEpQBbZ4MXKWTe4AM8jRMd-tmd8jqFHTaEEw9SKNK1-FFVAwMn9fkvsOQ-JYNZnWD9T7FgI-lJsQBoTrzcuAoNM/s1600/NadimRazaT554547.png", category: "BANGLA" },
   
 { name: "Bangla Kirton", url: "https://cloudfrontnet.vercel.app/tplay/playout/209618/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaXzeFwhCbp1-xihGL9ZN5sWDKassvscxFP0TNM8GK8D_fCGusQIHnM16lPJCA18UqIQSjOSpPXwlKLekweecTIpej0VQBwjbzsOzjWhzHP_2WPyCXQ5zI9NFOoftvOjEDjchetLjjrOAkkYk_JRsdtHLK-8YNZosoHwaxXPNs-lmtNShHmmFUdbu6sZU/s1600/Krishna%27sFluteandPeacockFeathers_copy_900x900.png", category: "BANGLA" },
 
@@ -1935,92 +1935,63 @@ var fixedMenu = true,
 { name: "EkusyETV", url: "https://bozztv.com/rongo/rongo-EkusheyTV/tracks-v2a1/mono.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwnQFr_IN0X9YOS226NmAv1lgBu9IkQVAkYbB_i_ULqEwBLL8SLJ-bp9mjMC92_cmFOz3vp1RmqGEoun_XAGHRjXvybYWzzZiU2nIpzMJInmo9LjxZQLs1jo16fGWtBK9fz5amI4RZGXKs81bc4IMR3EJ1ockvTz9a8_oef9-Wpp52QEPH4QYIupKzt_w/s1600/ETVLogowithGreenWatermark_1_copy_900x900.png", category: "BANGLA" },
 
     
-      { name: "Duronto TV", url: "https://tvsen6.aynaott.com/durontotv/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHw60hcU6dNcUzJnGXJPiEIW1FzwneZqKYami4ch0WnCH_lImp1WBD3Ssw8LmVRIhRv_Mh4nYQUmI3JF2Q5bXjzIN9_-boPwwOmc355loFzqZyvxn44ZqPQtsNfKZpBmoTUa7RucumJm7vG0tmAhoxDUUzvIrAhiuvleonXFKcwosQ9lzdq2Gf5FchmBI/s1600/AnthropomorphicTigerwithBoldBengaliLogo_copy_900x900.png", category: "BANGLA" },
+{ name: "Duronto TV", url: "https://tvsen6.aynaott.com/durontotv/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHw60hcU6dNcUzJnGXJPiEIW1FzwneZqKYami4ch0WnCH_lImp1WBD3Ssw8LmVRIhRv_Mh4nYQUmI3JF2Q5bXjzIN9_-boPwwOmc355loFzqZyvxn44ZqPQtsNfKZpBmoTUa7RucumJm7vG0tmAhoxDUUzvIrAhiuvleonXFKcwosQ9lzdq2Gf5FchmBI/s1600/AnthropomorphicTigerwithBoldBengaliLogo_copy_900x900.png", category: "BANGLA" },
       
       
       
-      { name: "GTV", url: "https://tvsen5.aynaott.com/Ravc7gPCZpxk/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEijPY8lEYq0c50-_LShpEvAzYeMd9ghQyuBnntgeJjYtknNHlKEm0OkR4uIf8RrxKEcC5BMatn84Mji0-A2mpm7YREIhKBp9uTLnlOIPXlakpcpCKpr5X3gvuO6MbIiGGNACIZXCmmYwd5qyHSkJyX-mhBGjBKHSnSBYxCdPMvm6_Gq39CUos8hHlph3Q8/s1600/ChatGPTImageJun23,2025,07_37_13PM_copy_900x900.png", category: "BANGLA" },
+{ name: "GTV", url: "https://tvsen5.aynaott.com/Ravc7gPCZpxk/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEijPY8lEYq0c50-_LShpEvAzYeMd9ghQyuBnntgeJjYtknNHlKEm0OkR4uIf8RrxKEcC5BMatn84Mji0-A2mpm7YREIhKBp9uTLnlOIPXlakpcpCKpr5X3gvuO6MbIiGGNACIZXCmmYwd5qyHSkJyX-mhBGjBKHSnSBYxCdPMvm6_Gq39CUos8hHlph3Q8/s1600/ChatGPTImageJun23,2025,07_37_13PM_copy_900x900.png", category: "BANGLA" },
 
     
 { name: "T Sports", url: "http://103.15.140.138/tsports/index.m3u8", img: "https://i.postimg.cc/K8wtTCp3/T-Sports.jpg", category: "SPORTS" },
 
 
-{ name: "Star Sports 1 HD", url: "https://live20.bozztv.com/akamaissh101/ssh101/starsports/chunks.m3u8", img: "https://raw.githubusercontent.com/subirkumarpaul/Logo/main/Star%20Sports%201%40.jpeg", category: "SPORTS" },
+{ name: "Star Sports 1 HD", url: "http://cd218.net-dtv4.org:80/live/8g5665q36d/rj9c9ucrhl/276730.m3u8", img: "https://raw.githubusercontent.com/subirkumarpaul/Logo/main/Star%20Sports%201%40.jpeg", category: "SPORTS" },
 
   
-{ name: "Star Sports 2 HD", url: "http://103.120.172.74:4200", img: "https://raw.githubusercontent.com/subirkumarpaul/Logo/main/Star%20Sports%202%40.jpeg", category: "SPORTS" },  
+{ name: "Star Sports 2 HD", url: "http://cd218.net-dtv4.org:80/live/8g5665q36d/rj9c9ucrhl/276732.m3u8", img: "https://raw.githubusercontent.com/subirkumarpaul/Logo/main/Star%20Sports%202%40.jpeg", category: "SPORTS" },
+ 
+
+{ name: "Star Sports 3 HD", url: "http://cd218.net-dtv4.org:80/live/8g5665q36d/rj9c9ucrhl/276733.m3u8", img: "https://raw.githubusercontent.com/subirkumarpaul/Logo/main/Star%20Sports%203%40.jpeg", category: "SPORTS" }, 
 
 
 { name: "MSsports", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/matribhumitv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiP4UHp6iO4OMvD-7otQZB7NVW-74FQKWE14CnHhKdX1lypP0oYmG0VW5KscsWw9lzjnfve1kSvbXisLSSz5SpCuSSyEzXfddKVPp0NzehWRkzMMbwCwSszjioCbeDH5NOq0XSfD5715iV3LY1hICMoJiEF555JI5VqIFj_aO5XCoiEQO7Nvqj8ZiJnsIA/s1600/NadimRazaTVSportsChannelLogo_copy_900x900.png", category: "SPORTS" },  
 
 
-
-
 { name: "RtaSports", url: "https://rtatv.akamaized.net/Content/HLS/Live/channel(RTA3)/variant.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8vv_7c928JU2WfBTrJLcgcVMTHgv842ZaH2uToHWUYz0bjZz18dcCb57FnxdiHhYFdHHhInqp-maLu7ouVfnulCkh7adB-skBFWnfFiHqistxp5Yu06WUap3rFoCIrfgA8VndOREHt1OoHlEes1Oe-CZHq6i4GhzcuDjekIgGirUkKbdozc28V4IKyiU/s1600/OdloSportandNadimRazaTVLogos_copy_900x900.png", category: "SPORTS" },  
 
-
-
-
-      
-
-      { name: "10Bangla", url: "https://live-bangla.akamaized.net/liveabr/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4I9nzlDTI5eICWje7eUPunvgLPFDxom29_-VFPxNcF1NYS1KiAGJzM-4adzm-x2EbWOcjfhrF2Xgd6yhitE9j1lw0laOu0T1TZZx2GS9TTA2gLWAl6pDJXiYXT3-vrzu1XENnVQXn6LgeMw40NCqnVaYlqk32Ww8Vr3fFgOV2SFgo39IBjJpPlSf1UxY/s1600/Enterr10BanglaLogoDesign_copy_900x900_1.png", category: "INDIAN" },
+{ name: "10Bangla", url: "https://live-bangla.akamaized.net/liveabr/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4I9nzlDTI5eICWje7eUPunvgLPFDxom29_-VFPxNcF1NYS1KiAGJzM-4adzm-x2EbWOcjfhrF2Xgd6yhitE9j1lw0laOu0T1TZZx2GS9TTA2gLWAl6pDJXiYXT3-vrzu1XENnVQXn6LgeMw40NCqnVaYlqk32Ww8Vr3fFgOV2SFgo39IBjJpPlSf1UxY/s1600/Enterr10BanglaLogoDesign_copy_900x900_1.png", category: "INDIAN" },
 
       
-
-      
-
-      
-
-      { name: "Chanel9", url: "https://tvsen6.aynaott.com/channel9/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhJqtnVDk2jwkIOHtXqaX1gXxqgDaOsTb1WiD49cQBPRQfwgH84QJ7qn7BWWUhSYvpZT_D8ZOR3c_90qyw6dGWQs4CGM3iwbeRQqcO9f1kjiOLpCruXbEU74Nb3CjdY_NDxa97bhJxjpeJByn3K8oVFNKPHFrvlKS1oc_WLPtbEUDBbHIvcKlplgkpCNTI/s1600/NadimRazaTV101.png", category: "BANGLA" },
-
-      
-
-  { name: "ENG VS IND TEST", url: "https://edge3-moblive.yuppcdn.net/drm/smil:tencricketdrm.smil/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg30cGQadd065v-8nqIQ6mYP4obJ2aIveCv4kiFy-icoEXkyxEO5XtTq7kJWWk7I9kdfGLC90Sk3l79A_1FUkuh2XTMJh53Ya3MOAuzDW1sc109rxgpU-hksxOHj9B69uraMzFUsTtekCEk6ZzytTpNnSpjJCnrIPCVSKaKIgWr_GzQqJqZhGzffX4hxyw/s1600/13e5d1e1-cfb0-436b-a136-2a6badb72819_copy_900x900_1.png", category: "SPORTS" },
-
-      
+{ name: "Chanel9", url: "https://tvsen6.aynaott.com/channel9/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhJqtnVDk2jwkIOHtXqaX1gXxqgDaOsTb1WiD49cQBPRQfwgH84QJ7qn7BWWUhSYvpZT_D8ZOR3c_90qyw6dGWQs4CGM3iwbeRQqcO9f1kjiOLpCruXbEU74Nb3CjdY_NDxa97bhJxjpeJByn3K8oVFNKPHFrvlKS1oc_WLPtbEUDBbHIvcKlplgkpCNTI/s1600/NadimRazaTV101.png", category: "BANGLA" },
 
 
+{ name: "ENG VS IND TEST", url: "https://edge3-moblive.yuppcdn.net/drm/smil:tencricketdrm.smil/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg30cGQadd065v-8nqIQ6mYP4obJ2aIveCv4kiFy-icoEXkyxEO5XtTq7kJWWk7I9kdfGLC90Sk3l79A_1FUkuh2XTMJh53Ya3MOAuzDW1sc109rxgpU-hksxOHj9B69uraMzFUsTtekCEk6ZzytTpNnSpjJCnrIPCVSKaKIgWr_GzQqJqZhGzffX4hxyw/s1600/13e5d1e1-cfb0-436b-a136-2a6badb72819_copy_900x900_1.png", category: "SPORTS" },
 
-      
-   { name: "StarSports 1", url: "https://live20.bozztv.com/akamaissh101/ssh101/starsports/chunks.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi43rsimZRa_d9D2BhYgWLGBoJEF5yKLffdt_WTNdTLZdngTyf0E0cQA5CL3UOQT8STgYUKpYkOUP2C3D_h9l-X8vMjAtQhhKzeQ_dW0T0ONW44Kpnhkwjfk_uj5FfaZS7gn58Adee-tNbx4OH412oQIQ0v4tgQUpVhJm4XAGHS-1DOYM6D80cEpXGMZIA/s1600/e4130794-83f4-489b-8883-dfe809922cfa_copy_900x900.png", category: "SPORTS" },
+{ name: "StarSports 1", url: "https://live20.bozztv.com/akamaissh101/ssh101/starsports/chunks.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi43rsimZRa_d9D2BhYgWLGBoJEF5yKLffdt_WTNdTLZdngTyf0E0cQA5CL3UOQT8STgYUKpYkOUP2C3D_h9l-X8vMjAtQhhKzeQ_dW0T0ONW44Kpnhkwjfk_uj5FfaZS7gn58Adee-tNbx4OH412oQIQ0v4tgQUpVhJm4XAGHS-1DOYM6D80cEpXGMZIA/s1600/e4130794-83f4-489b-8883-dfe809922cfa_copy_900x900.png", category: "SPORTS" },
   
+{ name: "ChannelI", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/channeli-8-org.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTFH1xBTgsqb3NfjpDP4f6N0EOULxA_DyD_FkcAONxwl65RFpo-EJoZFSYe1wwf4pVyBF7d8c2BuAdE50ikAFAvxRhpx2gXiu7FLy094HiZspHk7z0qIiS_-0yBCHQh2hjSlfeZ78ofYKiaw1wdNZ8IBIePESyjwg9kuSiqKk3Xpxb8cVsKOJHtbCbnoc/s1600/NadimRazaTV%203824.png", category: "BANGLA" },  
+
+{ name: "Nexus", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/nexustv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiiU9rhbVdE2zlqNzhNUyFjTvT7JnPzeuQ3-FG0nauuMW8Tc9cpA-y1QDWnXwRwt60okxgPy-8ALa3_QIT8K573axEWe0F0UJyiS56Z7JoTXIxbSyfEV_8vmePmXLEChkQpWqFgWNO-JDZZbMmAwNyqJjhhYHANALxIqv26x1h2wbxQ0r33Z9HV7oN4_iI/s1600/NadimRazaTV%2014144.png", category: "BANGLA" },
+
+{ name: "Music", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/musicbangla44.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgd19vxpcMHx3ondHgqbE9vHZ16plp1jjFpnsEiW7w_5IWgD-kxSXSwdiKxBAoH1eOK9KoaXflxLXze8ekH41Xee4gKEctc9CNMhk-Lnnz3ea4fszTbK9j0SZy-5LnYlp4atsq1ErWkGFU7zF6sSX8IduXI5CkUqgwAZoz8JURQqhr4bJIZE3-tZmr77Dc/s1600/NadimRazaTV%2014514.png", category: "BANGLA" },
+
+{ name: "Mohona", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/mohonatv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiB4j57dxJpB719gck9NRVAR4XK154BkMrPjOZjY0yWnDiqi_9CAWXYMpHNEEWKxtyfXWCNOpWjilw38QzEZcXWSatX5bu6DwmOVElHAg4vxwFi9jmwcWNn_gkXWtifU35JxxS9ECM0QORZQZSRPDaY8LJfrAx2T5BHgno8AGogE0fy2wbQbKMzzzS8kO8/s1600/NadimRazaTV%2041555.png", category: "BANGLA" },
+
+{ name: "Vision", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1715/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXJn2F5JlpxlrB2RsVhcKXOImUZG_dnTK0rjSKy2pk8ARUlSwoESRPoWKfirKBtPQMa7elt-rYzAygEknT9RB6jsxEpIepR0VjtHgXhuHs1VBaovk0OdobfNolSo1grhVqlpn-Gla9ABJe3C7gVD7xzWxW8eM0O4guwVvfpTn4y39XXCI76JW4bhWhM2o/s1600/NadimRazaTV%20415745.png", category: "BANGLA" },
+
+{ name: "BIZOY", url: "https://tvsen6.aynaott.com/bijoytv/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4RL5Muucq66NG-jPJp1-RBBoPRHl2lHDOuZ1JuCQvWHf68AUHZVo6ELcLeRX691uFUKM_j3-e4ckAp-l6NohptZE9Pe681wODInAomztU2dXAg6j1tGk6mYSjaqeUJUHGri-M44W1IAA5_v-EOB7UcaQbBGBQgFux8n917plRmAwguCyk7Fn-mkcOpd8/s1600/Bashundhara%20TV%20Logo%20Design.png", category: "BANGLA" },
+
+{ name: "IslamChanel", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/islamchbangla.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXoauHtaG2rrLck2RKFoX4PW04oeP7rUWpza85XZIWuHK9qxdQOvK05WkcAGBNKZ2u6k07cFzcpw2jQj-7ez6_saVy0aDZyA2UpMBKkdTaxyOoVeX2aWa-7KfBgQvJJHEQV8EuafuAgiZD_ZNdXixaIQojY4Kuzl109w8SO6HuvIT6doRfrggeezUFyuk/s1600/BangladeshiIslamicChannelLogo_copy_900x900.png", category: "BANGLA" },   
       
-      
-      
-      
-
-      
-
-    { name: "ChannelI", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/channeli-8-org.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTFH1xBTgsqb3NfjpDP4f6N0EOULxA_DyD_FkcAONxwl65RFpo-EJoZFSYe1wwf4pVyBF7d8c2BuAdE50ikAFAvxRhpx2gXiu7FLy094HiZspHk7z0qIiS_-0yBCHQh2hjSlfeZ78ofYKiaw1wdNZ8IBIePESyjwg9kuSiqKk3Xpxb8cVsKOJHtbCbnoc/s1600/NadimRazaTV%203824.png", category: "BANGLA" },  
-
-      
-
-      
-
-      { name: "Nexus", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/nexustv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiiU9rhbVdE2zlqNzhNUyFjTvT7JnPzeuQ3-FG0nauuMW8Tc9cpA-y1QDWnXwRwt60okxgPy-8ALa3_QIT8K573axEWe0F0UJyiS56Z7JoTXIxbSyfEV_8vmePmXLEChkQpWqFgWNO-JDZZbMmAwNyqJjhhYHANALxIqv26x1h2wbxQ0r33Z9HV7oN4_iI/s1600/NadimRazaTV%2014144.png", category: "BANGLA" },
-
-      { name: "Music", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/musicbangla44.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgd19vxpcMHx3ondHgqbE9vHZ16plp1jjFpnsEiW7w_5IWgD-kxSXSwdiKxBAoH1eOK9KoaXflxLXze8ekH41Xee4gKEctc9CNMhk-Lnnz3ea4fszTbK9j0SZy-5LnYlp4atsq1ErWkGFU7zF6sSX8IduXI5CkUqgwAZoz8JURQqhr4bJIZE3-tZmr77Dc/s1600/NadimRazaTV%2014514.png", category: "BANGLA" },
-
-      { name: "Mohona", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/mohonatv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiB4j57dxJpB719gck9NRVAR4XK154BkMrPjOZjY0yWnDiqi_9CAWXYMpHNEEWKxtyfXWCNOpWjilw38QzEZcXWSatX5bu6DwmOVElHAg4vxwFi9jmwcWNn_gkXWtifU35JxxS9ECM0QORZQZSRPDaY8LJfrAx2T5BHgno8AGogE0fy2wbQbKMzzzS8kO8/s1600/NadimRazaTV%2041555.png", category: "BANGLA" },
-
-      { name: "Vision", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1715/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXJn2F5JlpxlrB2RsVhcKXOImUZG_dnTK0rjSKy2pk8ARUlSwoESRPoWKfirKBtPQMa7elt-rYzAygEknT9RB6jsxEpIepR0VjtHgXhuHs1VBaovk0OdobfNolSo1grhVqlpn-Gla9ABJe3C7gVD7xzWxW8eM0O4guwVvfpTn4y39XXCI76JW4bhWhM2o/s1600/NadimRazaTV%20415745.png", category: "BANGLA" },
-
-      
-
-  { name: "BIZOY", url: "https://tvsen6.aynaott.com/bijoytv/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4RL5Muucq66NG-jPJp1-RBBoPRHl2lHDOuZ1JuCQvWHf68AUHZVo6ELcLeRX691uFUKM_j3-e4ckAp-l6NohptZE9Pe681wODInAomztU2dXAg6j1tGk6mYSjaqeUJUHGri-M44W1IAA5_v-EOB7UcaQbBGBQgFux8n917plRmAwguCyk7Fn-mkcOpd8/s1600/Bashundhara%20TV%20Logo%20Design.png", category: "BANGLA" },
-
-      
-
-   
-  { name: "IslamChanel", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/islamchbangla.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXoauHtaG2rrLck2RKFoX4PW04oeP7rUWpza85XZIWuHK9qxdQOvK05WkcAGBNKZ2u6k07cFzcpw2jQj-7ez6_saVy0aDZyA2UpMBKkdTaxyOoVeX2aWa-7KfBgQvJJHEQV8EuafuAgiZD_ZNdXixaIQojY4Kuzl109w8SO6HuvIT6doRfrggeezUFyuk/s1600/BangladeshiIslamicChannelLogo_copy_900x900.png", category: "BANGLA" },   
-      
-      { name: "MadaniTV", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/madanitvbangla.stream1/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiuunqu8u5HvcaiDg_U3RbEcoJ36Fqx9rUNVlokNgDbiCG96r42MNpImUJgCXfWt2jgEVCqIaJLJsx4UCccA8gfYVTJu_GKteAUd_PqksEVt4-enuDS4c8Jvpc8BVWU2oGn1KWkY1hoyJ_JguKwFMPIIh6wuFor4ho9fpuw3UQdSoPwATr1Lq-nXeWO6Q4/s1600/GreenDomeLogoDesign_copy_900x900.png", category: "BANGLA" },   
+{ name: "MadaniTV", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/madanitvbangla.stream1/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiuunqu8u5HvcaiDg_U3RbEcoJ36Fqx9rUNVlokNgDbiCG96r42MNpImUJgCXfWt2jgEVCqIaJLJsx4UCccA8gfYVTJu_GKteAUd_PqksEVt4-enuDS4c8Jvpc8BVWU2oGn1KWkY1hoyJ_JguKwFMPIIh6wuFor4ho9fpuw3UQdSoPwATr1Lq-nXeWO6Q4/s1600/GreenDomeLogoDesign_copy_900x900.png", category: "BANGLA" },   
 
 
 { name: "Makkah TV", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/makkah.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPI9ztTJ2vuqnQBLksicarsvckrJoppd_y3dN_WT1oYR70rgfUXhztrwUhEYHHiJdUYZI5mKPKWIs9cshTuWjeT6U7twl-aRc7f7tti90_1Vt4wR7dI-58NmGpo_Fk08j2tt6om3bEQJM-y7b2aPAUo5Rnhi5R58-QjsM-fNFyGvmyxV1fT-DsHjeoyY8/s1600/KaabaLogoforNadimRazaTV_copy_900x900.png", category: "BANGLA" },   
 
 { name: "ChanelS", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgflV8cP0_PU3sa5PEKjlYTBfTEjDNRWSuv0Gahs5wb_yZ2-OKjVp2YoOkMPpSMMR1Z9_2xxlpm5KqQpiWupXqJLWPqyscDVa_1sLZpX41xZjgnjJRP6sg1KjzKjERoeFouEzGA7U1B-myhn5qXK6uj2R-drl4hzeSUKE-YOsW2eUhmDY7f7F0ATIXFHJY/s1600/NadimRazaTVLogoDesign%281%29_copy_900x900.png", category: "BANGLA" },   
 
+
+{ name: "Somoy", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYCgcsRHgXpA0wPwSYvoTEbPdVaxO50Q8nF02WzdMlBNxpcHgDhUmEJ3qb-yqIUGYTIecb32wJECeQEs7bJ9zVONg-26DIKkjvESJkeSKYe1qtXkYt8Nz4jE85EFkWUQbHk7oRj_1QgOLQZqxZEbigDfrq8CG0rKoNXVgWplPu8Rw4or6sMhgIQTXIWZE/s1600/BangladeshiNewsChannelLogoDesign_copy_900x900.png", category: "BANGLA" },
 
       
 { name: "Indepent", url: "https://bozztv.com/rongo/rongo-IndependentTV/tracks-v1a1/mono.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKmioilyF5vNY2G0FDdznQUYQVqSS2FMjAT7nb6fVDVNFZF8UB5XnxYtHBRxcqVIVpkVq4xtaeGoOFg0l3XjGfJAR8ZdB74nqHaH3W1L4gXHFEUaB5WoAcjNCFfIkLIr2-mwVsp0HlKqlsciE2lr1vUL-5ljB3j8ReleE1VcDSzoyjRehrNxSvhZedQYI/s1600/IndependentLogowithNadimRazaTVBranding_copy_900x900.png", category: "BANGLA" },
@@ -2031,57 +2002,27 @@ var fixedMenu = true,
 
 { name: "Channel 52", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/channel25usa.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJJI2SXdaDaeB_3BV3DNVDf1xcHCxlIq2ACvWeQTWecwodkBSirv45LhSG41QcOJPEW1JstxXC6_J4oCBlgxHUnjd-tBANh5nMjSbSfcdc8wNk7VWoRAHjfS8U2_OKcbN7ZKN56tXhqSAXC2Yt8i7XD1HqPWAakQN08oj2V6MvT-tYhPpwduIUL7ntBuA/s1600/52ChannelLogowithNadimRazaTV_1_copy_900x900.png", category: "BANGLA" },
 
-
-   
-      
-      { name: "DBC", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/dbcnews.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5vy0M4JYU2Zz9DJuvp3rcqYcD3Tb_Vur3Zdh1STL7GmtW8jeBwR1dMSpqq9IzWTfUo_Y6HXRZtwM-gEzxMeAlr2WCCKMEYmjwwAfi9BTt4FSFSTPo_D72ODuK5-yU6EFymCnmSPQtY3pfP6xxD3e_M0zB7t3d9skm2dqbXjNrYGC-4bLzjHKjvsJojL8/s1600/DBC24_7NEWSLogo_copy_900x900.png", category: "BANGLA" },
+{ name: "DBC", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/dbcnews.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5vy0M4JYU2Zz9DJuvp3rcqYcD3Tb_Vur3Zdh1STL7GmtW8jeBwR1dMSpqq9IzWTfUo_Y6HXRZtwM-gEzxMeAlr2WCCKMEYmjwwAfi9BTt4FSFSTPo_D72ODuK5-yU6EFymCnmSPQtY3pfP6xxD3e_M0zB7t3d9skm2dqbXjNrYGC-4bLzjHKjvsJojL8/s1600/DBC24_7NEWSLogo_copy_900x900.png", category: "BANGLA" },
   
+{ name: "SandaTV", url: "https://live.sanonda.tv/sanonda/tracks-v1a1/mono.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-iw6zxalUpHgu8tPplgEsPq5O93AczlON_UHvhCtTCQxBipVh9W7J6Ug1KwPsCFjfbqn3r5gFHHmRyh0J_GmMOJkLVWX-F4SP8xyR0FjTrT10LEXyUyExpQnlo5yUHhznbwgDzRYYMNYP4ZSV5AKZkFS-5StcXvv3liTvhLzcMbglJmlXvthxnb4xfBg/s1600/SanandaTVLogowithWatermark_copy_900x900.png", category: "BANGLA" },
   
-      
-      { name: "SandaTV", url: "https://live.sanonda.tv/sanonda/tracks-v1a1/mono.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-iw6zxalUpHgu8tPplgEsPq5O93AczlON_UHvhCtTCQxBipVh9W7J6Ug1KwPsCFjfbqn3r5gFHHmRyh0J_GmMOJkLVWX-F4SP8xyR0FjTrT10LEXyUyExpQnlo5yUHhznbwgDzRYYMNYP4ZSV5AKZkFS-5StcXvv3liTvhLzcMbglJmlXvthxnb4xfBg/s1600/SanandaTVLogowithWatermark_copy_900x900.png", category: "BANGLA" },
+{ name: "Movie", url: "https://jolshabd.com/live/mbanglatv/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEga0eis4Doh3OZTmFzdgEG2LgN9eEjJZDbaU0X583e9O9EHeX5giBK_ngjB5SB0IrO4cDuq3uoMvTmnqySHJGoqLG_14Ni4yM44__8W7rGbeZk_paU80_-EFdOAkOeQE8xbsgMjNHq0xlcuwHEIJlDUeNS3oF_HFb_I75HI1yxouNdI2IQcN8jFUPX9Stc/s1600/StylizedSwithBengaliCinemaLogo_copy_900x900.png", category: "BANGLA" },
   
-      
-      
-      
-     { name: "Movie", url: "https://jolshabd.com/live/mbanglatv/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEga0eis4Doh3OZTmFzdgEG2LgN9eEjJZDbaU0X583e9O9EHeX5giBK_ngjB5SB0IrO4cDuq3uoMvTmnqySHJGoqLG_14Ni4yM44__8W7rGbeZk_paU80_-EFdOAkOeQE8xbsgMjNHq0xlcuwHEIJlDUeNS3oF_HFb_I75HI1yxouNdI2IQcN8jFUPX9Stc/s1600/StylizedSwithBengaliCinemaLogo_copy_900x900.png", category: "BANGLA" },
-  
-      
-    
-      
-      
-      
-      
-      
-      
-      
+{ name: "Boishaki", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/boishakhitv-org.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDgG3JRzTR3ZOT6xNeTY7OLxn5eaDgOvxpiULXt2VK_9-i5aZe5l7xawJqAMm3Znan749TizsHP5agWIiPsLp_l1J94Zou7Daxubzs6AH8cjUxcklTnF_QH0nMUoKBMf3u_929nJURDEPlK-LZCRVtFjq89XuNbV7cUcgMHqiN8xIrGeIMxHY83yF71q0/s1600/BoishakhiTVLogowithBengaliScript_copy_900x900.png", category: "BANGLA" },
 
-  { name: "Boishaki", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/boishakhitv-org.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDgG3JRzTR3ZOT6xNeTY7OLxn5eaDgOvxpiULXt2VK_9-i5aZe5l7xawJqAMm3Znan749TizsHP5agWIiPsLp_l1J94Zou7Daxubzs6AH8cjUxcklTnF_QH0nMUoKBMf3u_929nJURDEPlK-LZCRVtFjq89XuNbV7cUcgMHqiN8xIrGeIMxHY83yF71q0/s1600/BoishakhiTVLogowithBengaliScript_copy_900x900.png", category: "BANGLA" },
+{ name: "ATN", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1722/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjolnya3olX2_O7yJAQ40FDd31THXNMwYf_Me2Xk-kL5NAtDdB5QLyZNMQ5l8Hrb0N470Dv7LajvTta3CxMYU9yuEs9lCGW4wCu0J_gu6NHP7mD6-xbdklPIgqyIIsmf9Z1Lc5hMPYbHVWL85EIPTJkoB7iz1SECUwJALbMSO3Y2usM_sGuhu9IhhleVR4/s1600/ATNBanglaLogoDesign_copy_900x900.png", category: "BANGLA" },
 
+{ name: "PeaceTV", url: "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj07M3JdRgE4UUC-s331nRfZW-fC0L3CszAUyy-DsTff5UsgaHIfHiMdaQvjsjlAiSWADb0cPxkgwRZc2OHqcGzTdUdsg1XznO7E9xoN2BWBzPNpplZ5AuXttM2kZ0ypV9hhaeDa3gm6u3xaYb_ttDgs9SdgDnpSftxth6kO8JvI0qCH0q_nSEba6R7nos/s1600/IslamicPeaceTVLogoDesign_copy_900x900.png", category: "BANGLA" },
       
-
-      
-
-      { name: "ATN", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1722/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjolnya3olX2_O7yJAQ40FDd31THXNMwYf_Me2Xk-kL5NAtDdB5QLyZNMQ5l8Hrb0N470Dv7LajvTta3CxMYU9yuEs9lCGW4wCu0J_gu6NHP7mD6-xbdklPIgqyIIsmf9Z1Lc5hMPYbHVWL85EIPTJkoB7iz1SECUwJALbMSO3Y2usM_sGuhu9IhhleVR4/s1600/ATNBanglaLogoDesign_copy_900x900.png", category: "BANGLA" },
-
-      
-
-      { name: "PeaceTV", url: "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj07M3JdRgE4UUC-s331nRfZW-fC0L3CszAUyy-DsTff5UsgaHIfHiMdaQvjsjlAiSWADb0cPxkgwRZc2OHqcGzTdUdsg1XznO7E9xoN2BWBzPNpplZ5AuXttM2kZ0ypV9hhaeDa3gm6u3xaYb_ttDgs9SdgDnpSftxth6kO8JvI0qCH0q_nSEba6R7nos/s1600/IslamicPeaceTVLogoDesign_copy_900x900.png", category: "BANGLA" },
-      
-      
-      
-    { name: "JALSHA", url: "https://tvsen5.aynaott.com/gUX8BJmNc2yF/tracks-v1a1/mono.ts.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7FHqTQd0HzZ6Czug-qr54cPEIGhZb4nAGa2R5P-f1giDsZ3fcTZuSa3QAgGFPtmQgAI3NZlX-GdOe3c0wUQUerpHg0Z3HuxtQqta0QM9P9OJyvhhZtmnK4sJyHr2sfCCvXNTa9FMoTp1tpWluuMcmiYQGp3Fi0wHQTPMBBy_eu3Cxjw7p6Y3lpSVwKtk/s1600/VibrantStarJalsaLogoDesign_copy_900x900_1.png", category: "INDIAN" },
+{ name: "JALSHA", url: "https://tvsen5.aynaott.com/gUX8BJmNc2yF/tracks-v1a1/mono.ts.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7FHqTQd0HzZ6Czug-qr54cPEIGhZb4nAGa2R5P-f1giDsZ3fcTZuSa3QAgGFPtmQgAI3NZlX-GdOe3c0wUQUerpHg0Z3HuxtQqta0QM9P9OJyvhhZtmnK4sJyHr2sfCCvXNTa9FMoTp1tpWluuMcmiYQGp3Fi0wHQTPMBBy_eu3Cxjw7p6Y3lpSVwKtk/s1600/VibrantStarJalsaLogoDesign_copy_900x900_1.png", category: "INDIAN" },
      
-      
-   
-    { name: "ZeeBangla", url: "https://smart.bengaldigital.live/Zee-Bangla/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaFLMzF0H_PLZckTg-0HnrocACrJroHJx2LjsZVDCrIyQQTZh9vLcFK49a80sA6vrySmcPV8n-DZyBG6wAQzDp7wxPf90derjNeXacPoCc7xyu_geeQvongq9kaItGcI5NMLycR_kzgAX7dhqAa2ailsUQ2VNczcF7JzxEzno2rJekBM7KIGUwkYC72Po/s1600/ZeeBanglaLogowithNadimRazaTV_copy_900x900.png", category: "INDIAN" },
+{ name: "ZeeBangla", url: "https://smart.bengaldigital.live/Zee-Bangla/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaFLMzF0H_PLZckTg-0HnrocACrJroHJx2LjsZVDCrIyQQTZh9vLcFK49a80sA6vrySmcPV8n-DZyBG6wAQzDp7wxPf90derjNeXacPoCc7xyu_geeQvongq9kaItGcI5NMLycR_kzgAX7dhqAa2ailsUQ2VNczcF7JzxEzno2rJekBM7KIGUwkYC72Po/s1600/ZeeBanglaLogowithNadimRazaTV_copy_900x900.png", category: "INDIAN" },
        
-      { name: "Zee Bangla Cinema", url: "https://smart.bengaldigital.live/Zee-Bangla-Cinema/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6FlTsvrXjTEVaM9-FqJFiq8LnKv_nLEBRqcCT0aJKPKRv5BWDvrtpheGSr48OClsGcPO0KMuki-_RxWBiVcBYGw_Cuv0tz0GeyKz1bdaVDAEPNp8C3ivXLQs066bbz0VeJu7j6_0bagJwzDtzBRmUxP2mE5_-7vwkNchPqvzap3Ot2J2Ds11G0TCFx1I/s1600/ZeeBanglaCinemaPromoDesign_1_copy_900x900.png", category: "INDIAN" },
+{ name: "Zee Bangla Cinema", url: "https://smart.bengaldigital.live/Zee-Bangla-Cinema/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6FlTsvrXjTEVaM9-FqJFiq8LnKv_nLEBRqcCT0aJKPKRv5BWDvrtpheGSr48OClsGcPO0KMuki-_RxWBiVcBYGw_Cuv0tz0GeyKz1bdaVDAEPNp8C3ivXLQs066bbz0VeJu7j6_0bagJwzDtzBRmUxP2mE5_-7vwkNchPqvzap3Ot2J2Ds11G0TCFx1I/s1600/ZeeBanglaCinemaPromoDesign_1_copy_900x900.png", category: "INDIAN" },
 
-
-  
-       { name: "ColorsBan", url: "https://tvsen5.aynaott.com/u3LkNQ7UHhFX/tracks-v1a1/mono.ts.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRxTKw7Waf7pE-u1c7DLQTjWyHZZEtkpbemaiDLQJIA89m6Bq9FDAbX9hUwVNMmx9FTJvyJoWIvVg_LNrXY8mWKlNSbNVp6yZsGueCW8o-D0_vAYG1ff7R7taaWn0eYuvXwAtrqst680Fi8n74hRFdCF6xYuXZNVDqK9AYdRq5npe-DkoBulPDp1ReUog/s1600/ColorsBanglaLogowithNadimRazaTV_copy_900x900.png", category: "INDIAN" },
+{ name: "ColorsBan", url: "https://tvsen5.aynaott.com/u3LkNQ7UHhFX/tracks-v1a1/mono.ts.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRxTKw7Waf7pE-u1c7DLQTjWyHZZEtkpbemaiDLQJIA89m6Bq9FDAbX9hUwVNMmx9FTJvyJoWIvVg_LNrXY8mWKlNSbNVp6yZsGueCW8o-D0_vAYG1ff7R7taaWn0eYuvXwAtrqst680Fi8n74hRFdCF6xYuXZNVDqK9AYdRq5npe-DkoBulPDp1ReUog/s1600/ColorsBanglaLogowithNadimRazaTV_copy_900x900.png", category: "INDIAN" },
          
-     { name: "Star Plus ", url: "https://live.dinesh29.com.np/stream/livetv/starplushd/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_UGdDtFb73MGytBLgMhA_15mQ1E7f9ta31UlKvlSniZuiDyP9z7RmdqDlKArj4jhfNdAntyieSTL7jmdVoGhrdydtgw8LqQPkJZRtwXXlzK71MkFWNqsJZxHhs9pSsL-PbyDQCzqvQs7jka7X4tOiXoMn0woMfXBqktZu61v5vBHdIByxb768W1GiGFM/s1600/starplushd_copy_900x900.png", category: "INDIAN" },
+{ name: "Star Plus ", url: "https://live.dinesh29.com.np/stream/livetv/starplushd/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_UGdDtFb73MGytBLgMhA_15mQ1E7f9ta31UlKvlSniZuiDyP9z7RmdqDlKArj4jhfNdAntyieSTL7jmdVoGhrdydtgw8LqQPkJZRtwXXlzK71MkFWNqsJZxHhs9pSsL-PbyDQCzqvQs7jka7X4tOiXoMn0woMfXBqktZu61v5vBHdIByxb768W1GiGFM/s1600/starplushd_copy_900x900.png", category: "INDIAN" },
 
 { name: "ZeeTV HD", url: "https://live.dinesh29.com.np/stream/tataplay/zeetvhd/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYyGImv_rpC0iVLuNkew4sHa7YtjVoqsZuIC9PHjc0u83aK0kMCGLU3Swmugl-lSIFflY6VDG0sRHD4ApwNiqU6c78GnPkaalx0p8a9RALkrnNLupIx6HHCIXS35_ORY73Y8i-e3yNjgquAL_jZyRwvnc1dIAhMG1lWHIH1xQpmO4jXR0DF-esJp-uAK4/s1600/zeetvhd_copy_900x900.png", category: "INDIAN" },
 
@@ -2101,284 +2042,123 @@ var fixedMenu = true,
 { name: "Movies Now", url: "https://live.dinesh29.com.np/stream/tataplay/moviesnowhd/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNMXpGN4oJIT5_tNM7815CNIY3xQYErrao-Qn3ufIZsLYQRTLhWsV7IJ6qiwVpZSM-MDLWOdlTI-ly5pAidLtRYJ4QmG-mwqlL392-NkBXTwa9OT7BpAZi1EPO4jMCcnHTRqRh25CG8bMjpSLbbdYgDok6-4wgNOVEqbLtVFgXxQfq6Vs3Gau5JOkgVSk/s1600/moviesnowhd_copy_900x900.png", category: "INDIAN" },
 
 
-
-
 { name: "GopalBhar", url: "https://cloudfrontnet.vercel.app/tplay/playout/209611/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi99xWhOGdm12aQTycpOQWn9erty2SVMFIFFJqDsXM3RKDHk4S8fYQMARqsVwJWRwfj5I3bolyHa96NIUJ9X7J8B9Hpe2HEL9jMvYL1FbjhwsfnmcsV9F9yKiGKXVy_Fy11luBF731qWuoTA5e5-mnNYyLp59TirsSIQsaAdwV8CS1v3OkK5O1HUMJuzis/s1600/WalkingThroughtheVillagePath_1_copy_900x900.png", category: "INDIAN" },
  
+{ name: "Movie 1", url: "https://cdn-2.pishow.tv/live/1459/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitWsg_yYy_couXdo1TYesML2Mttifc2K9n-UYa7EMdI1pXY6Ukq6JYcwpOseHfnvYAQqLS3Ai5aDahVxgMWMI6K6VO_Rurq3Kgq0PEzQD17e4EJS84LxYyIzh9Koa4o5oDzZD5yR-CUoVHNwQm5voVtqqDVGI2xLkpwqt_Eme0Uc3eUD1XL0PhmbIR8c8/s1600/GoldenRadianceandBoldText_copy_900x900_1.png", category: "INDIAN" },
+      
+{ name: "Movie 2", url: "https://cdn-2.pishow.tv/live/1461/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitWsg_yYy_couXdo1TYesML2Mttifc2K9n-UYa7EMdI1pXY6Ukq6JYcwpOseHfnvYAQqLS3Ai5aDahVxgMWMI6K6VO_Rurq3Kgq0PEzQD17e4EJS84LxYyIzh9Koa4o5oDzZD5yR-CUoVHNwQm5voVtqqDVGI2xLkpwqt_Eme0Uc3eUD1XL0PhmbIR8c8/s1600/GoldenRadianceandBoldText_copy_900x900_1.png", category: "INDIAN" },  
+      
+{ name: "Movie 3", url: "https://cloudfrontnet.vercel.app/tplay/playout/209612/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiulOSH52HU80bFDkGLFLyE1Z4fHSK8LrH59TckacjeLkvmxgyXxaXwPlJCKQJlkqvhZ-VMiatsJq8yAXRf3jyzs0HwYtXW4cACHsXT3Dnzlus9jn-4aW6wdcwbdFBNn1VLSNNwdAYnMA_c-7xEyfgwAp5NjcZUh8g_dV_Z9a847dYCys_7P4sdZn-6GbM/s1600/ALLTimeMOVIESLogoDesign_copy_900x900_1.png", category: "INDIAN" },    
       
       
-      { name: "Movie 1", url: "https://cdn-2.pishow.tv/live/1459/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitWsg_yYy_couXdo1TYesML2Mttifc2K9n-UYa7EMdI1pXY6Ukq6JYcwpOseHfnvYAQqLS3Ai5aDahVxgMWMI6K6VO_Rurq3Kgq0PEzQD17e4EJS84LxYyIzh9Koa4o5oDzZD5yR-CUoVHNwQm5voVtqqDVGI2xLkpwqt_Eme0Uc3eUD1XL0PhmbIR8c8/s1600/GoldenRadianceandBoldText_copy_900x900_1.png", category: "INDIAN" },
+{ name: "Movie 4", url: "https://cloudfrontnet.vercel.app/tplay/playout/209627/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5R4GGvdkgQHjuiGaHqGKEJ4m2LFlBhmFoJGl2_2DqThwYzd7YalwU18bTEqh2jdqQMqEc1Qz9dZBwdfoRvPKcKaxqPZzsH3jrjgTiO4OAMM68x-RMsidon9OELn_Gg3VzH9rMZaCS-dl6ENhMAq3hkxS04XBWueLQJVClD2xuPvvl3I07LyjArMux3yk/s1600/KolkataMovietoneLogoDesign_copy_900x900.png", category: "INDIAN" },    
       
       
-    
-    { name: "Movie 2", url: "https://cdn-2.pishow.tv/live/1461/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitWsg_yYy_couXdo1TYesML2Mttifc2K9n-UYa7EMdI1pXY6Ukq6JYcwpOseHfnvYAQqLS3Ai5aDahVxgMWMI6K6VO_Rurq3Kgq0PEzQD17e4EJS84LxYyIzh9Koa4o5oDzZD5yR-CUoVHNwQm5voVtqqDVGI2xLkpwqt_Eme0Uc3eUD1XL0PhmbIR8c8/s1600/GoldenRadianceandBoldText_copy_900x900_1.png", category: "INDIAN" },  
-      
-  
-     { name: "Movie 3", url: "https://cloudfrontnet.vercel.app/tplay/playout/209612/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiulOSH52HU80bFDkGLFLyE1Z4fHSK8LrH59TckacjeLkvmxgyXxaXwPlJCKQJlkqvhZ-VMiatsJq8yAXRf3jyzs0HwYtXW4cACHsXT3Dnzlus9jn-4aW6wdcwbdFBNn1VLSNNwdAYnMA_c-7xEyfgwAp5NjcZUh8g_dV_Z9a847dYCys_7P4sdZn-6GbM/s1600/ALLTimeMOVIESLogoDesign_copy_900x900_1.png", category: "INDIAN" },    
+{ name: "Tplay Hindi", url: "https://cloudfrontnet.vercel.app/tplay/playout/209592/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZ6YnrOMoPXyMggJRK41rwFoveWp2o55YS-f8HhsHyNdlqvjiE2RHTtROav04BOhPR19nDy9JxvF8E8BeJ92JIrC-J84jP9oVM9phUEm8E_8LI8NyNymbUaffKZ2iailw6sbiRMbIIcCE2dHm2BSJXWIYfUlsfEACuvppzNzNdlFvzYltTL1cgU28plSQ/s1600/HindiSongsLogoDesign_copy_900x900_1.png", category: "INDIAN" },    
       
       
-    { name: "Movie 4", url: "https://cloudfrontnet.vercel.app/tplay/playout/209627/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5R4GGvdkgQHjuiGaHqGKEJ4m2LFlBhmFoJGl2_2DqThwYzd7YalwU18bTEqh2jdqQMqEc1Qz9dZBwdfoRvPKcKaxqPZzsH3jrjgTiO4OAMM68x-RMsidon9OELn_Gg3VzH9rMZaCS-dl6ENhMAq3hkxS04XBWueLQJVClD2xuPvvl3I07LyjArMux3yk/s1600/KolkataMovietoneLogoDesign_copy_900x900.png", category: "INDIAN" },    
+{ name: "SunBangla", url: "https://smart.bengaldigital.live/sun-bangla-paid/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7Stw22VLpLbD1W3HYcGVqw7fx5RMW0Z5fmx-nNnasDfLPHupMMjf0tbK2E-82qiPE1oQFb8pptlLX7912u0oPhPiH_7Akm2zI_OqbZmrH6RAy-yMIZa-oy3RPXm4Xi6DPqbll6M3B3g_6EWKb1E1Bt2nIU_gEnMyTlh_wBlN1R9I8_a115V2psHrS3Ro/s1600/SUNBangla&NadimRazaTVLogo_copy_900x900.png", category: "INDIAN" },  
       
+{ name: "9XM HD", url: "https://d14c63magvk61v.cloudfront.net/strm/channels/9xm/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjiGC0wT3ja7ZcbTl7yGpm4X9BMtfiCTsejIn3kDk_KKP2-Vzd6mQJD0QquLDSCSAlg5HrRL9lNYawNR51toENqWBzTz6EFX7mNlfMS5T3_-K6KD__yxtr3rnsMX83pnxUGMGngPupcNltt_dD324D-ZNfaFJmy-7dshVn0kTFbAWoX80g7_id0XeXlVkM/s1600/9XMLogowithNadimRazaTVBranding_copy_900x900_1.png", category: "INDIAN" },
       
-    { name: "Tplay Hindi", url: "https://cloudfrontnet.vercel.app/tplay/playout/209592/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZ6YnrOMoPXyMggJRK41rwFoveWp2o55YS-f8HhsHyNdlqvjiE2RHTtROav04BOhPR19nDy9JxvF8E8BeJ92JIrC-J84jP9oVM9phUEm8E_8LI8NyNymbUaffKZ2iailw6sbiRMbIIcCE2dHm2BSJXWIYfUlsfEACuvppzNzNdlFvzYltTL1cgU28plSQ/s1600/HindiSongsLogoDesign_copy_900x900_1.png", category: "INDIAN" },    
-      
-      
-      
-    { name: "SunBangla", url: "https://smart.bengaldigital.live/sun-bangla-paid/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7Stw22VLpLbD1W3HYcGVqw7fx5RMW0Z5fmx-nNnasDfLPHupMMjf0tbK2E-82qiPE1oQFb8pptlLX7912u0oPhPiH_7Akm2zI_OqbZmrH6RAy-yMIZa-oy3RPXm4Xi6DPqbll6M3B3g_6EWKb1E1Bt2nIU_gEnMyTlh_wBlN1R9I8_a115V2psHrS3Ro/s1600/SUNBangla&NadimRazaTVLogo_copy_900x900.png", category: "INDIAN" },  
-      
-        
-      
-      
-      
-      
-      { name: "9XM HD", url: "https://d14c63magvk61v.cloudfront.net/strm/channels/9xm/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjiGC0wT3ja7ZcbTl7yGpm4X9BMtfiCTsejIn3kDk_KKP2-Vzd6mQJD0QquLDSCSAlg5HrRL9lNYawNR51toENqWBzTz6EFX7mNlfMS5T3_-K6KD__yxtr3rnsMX83pnxUGMGngPupcNltt_dD324D-ZNfaFJmy-7dshVn0kTFbAWoX80g7_id0XeXlVkM/s1600/9XMLogowithNadimRazaTVBranding_copy_900x900_1.png", category: "INDIAN" },
-      
-      
-        
-
 
 { name: "B4Umovie", url: "https://d3kdywbtdfbp9z.cloudfront.net/v1/manifest/93ce20f0f52760bf38be911ff4c91ed02aa2fd92/dff423e0-3c82-46d6-9ecb-3baa96b5694a/cd1f59d6-9b5d-43f0-bfb2-6ca9edc99f27/0.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVJk3M031mdsFJjCqotDhNoO3PuCMeZrps1FLTTTuZMe8NbkqxVowJYd-gv4AFr0mK8VZ_xKogEpUe8c6_76ExP0Qkpqv02Z6ZEOSxhVFKIVwtFQQ7-bZiqaXGNiVVFxSBzZNP1ZHL5fedBTLbhzgJzW803OIIe14_kUC8QyyT4fhmy3ukJFIAFexuNUk/s1600/B4UMoviesLogowithNadimRazaTV_copy_900x900_1.png", category: "INDIAN" },
       
+{ name: "B4Umusic", url: "https://d3kdywbtdfbp9z.cloudfront.net/v1/manifest/93ce20f0f52760bf38be911ff4c91ed02aa2fd92/dff423e0-3c82-46d6-9ecb-3baa96b5694a/4598c408-0e38-488c-9b64-fc845d1ea2b6/1.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG5F5bkCl1_7ULXAvL7sklW0LzX-yOckVOWBDcOrLqQI6UleLY6zkPAgnYuYPvqq4Jmj3VLcWMUPeWMzXl-3OqhwZL9BskRHJfDErzFWYhsQaiZEuzuz_sL2lFnYjIycACxS7OfUbs7BjhXgOAjUGdvBfi2oTLYXpsD_GE45k79V0qr_i1dB0JF5QBnAA/s1600/B4UMusicwithNadimRazaTVLogo_copy_900x900.png", category: "INDIAN" },
+      
+{ name: "SangethBAN", url: "https://cdn-4.pishow.tv/live/1143/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4e2y8s32kBZDRrFz7XO1OdJCzcwjeQSXb2Ysvd9Z02WheXXM6a7aIpd8OvYmuOSa235RMKodgF7pSdb_L4EQdTqXAWwKRoixrfZYPVR_GdjhXh3gmjmyyrUS-X1pyjrzq1Okle7naUBt9QFCC0sUa2897Jk_6CwduvH_wyoo_g9gJr6AFpUSFZySalRw/s1600/SangeetBanglaLogoDesign_copy_900x900_1.png", category: "INDIAN" },
+      
+{ name: "ZOOM", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/zoomin.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPtATyVD6zIHcpWvMlSTz3ZxGJ_7FeK0eLHBvFH7xjZ8fAsdiTghut6akxYyIto-0rMgko3MG9KV7WR7aLVUgJDkfZiN7uTGcuSSf8QBwYKQn0q8H1n3f61LCUHwQsRD-bmi4qsjYHQYKTew6oShZhneanG-iiut4CejY32oASHzd5-iUSJ0LYoKLMYjQ/s1600/BoldMinimalistZoomLogo_copy_900x900.png", category: "INDIAN" },
       
       
-    
-   { name: "B4Umusic", url: "https://d3kdywbtdfbp9z.cloudfront.net/v1/manifest/93ce20f0f52760bf38be911ff4c91ed02aa2fd92/dff423e0-3c82-46d6-9ecb-3baa96b5694a/4598c408-0e38-488c-9b64-fc845d1ea2b6/1.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG5F5bkCl1_7ULXAvL7sklW0LzX-yOckVOWBDcOrLqQI6UleLY6zkPAgnYuYPvqq4Jmj3VLcWMUPeWMzXl-3OqhwZL9BskRHJfDErzFWYhsQaiZEuzuz_sL2lFnYjIycACxS7OfUbs7BjhXgOAjUGdvBfi2oTLYXpsD_GE45k79V0qr_i1dB0JF5QBnAA/s1600/B4UMusicwithNadimRazaTVLogo_copy_900x900.png", category: "INDIAN" },
+{ name: "ZoMusic", url: "https://livecdn.live247stream.com/joomusic/tv/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNpQi9_0P97bAywoLekW2eUBO9OKkCFu3OJw0HPSeYENjhp6Dkntq2Nu2txW40QsAORP330ZK6PRpTezK4mcx4qTtpBoHOHkGkD_YQ5cTlWkIjXsPsHw8QXbHsFQQZXQTRkexNlQOUNkGx-oSZXdKSJxdJ71S6u4qMBCjqydZMASaF2DrXN-dWYmBOmcY/s1600/ModernLogoDesignwithSpeakerIcons_copy_900x900_1.png", category: "INDIAN" },
       
       
-    
+{ name: "Masti", url: "https://sabliveyupp.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/sablive_https/mastii/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHslsenwNE5covP96X1eL2TeY4q3qb5S3ee22-MihDxRZqUg2R5gYV9FDUL5EzSjutasFEG5YEvprSBLGzpIg4RqnkRJ5OXQCNgTqXtMIFxq7f9FnWDlv8KhMa50ZZPBqrj5w_2bVkAa1bUFtmZ2wM-66Vn0B6GUINyVUrE4wGFpPbvPqA0rxn3KCk7iQ/s1600/AB-MASTiiiSABGROUPLogo&NadimRazaTV_copy_900x900.png", category: "INDIAN" },  
       
-    { name: "SangethBAN", url: "https://cdn-4.pishow.tv/live/1143/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4e2y8s32kBZDRrFz7XO1OdJCzcwjeQSXb2Ysvd9Z02WheXXM6a7aIpd8OvYmuOSa235RMKodgF7pSdb_L4EQdTqXAWwKRoixrfZYPVR_GdjhXh3gmjmyyrUS-X1pyjrzq1Okle7naUBt9QFCC0sUa2897Jk_6CwduvH_wyoo_g9gJr6AFpUSFZySalRw/s1600/SangeetBanglaLogoDesign_copy_900x900_1.png", category: "INDIAN" },
+
+{ name: "E24", url: "https://live-e24.dailyhunt.in/eternowsa/live/amlst:E24_,b256,b512,b1024,b1824,.smil/playlist_1824k.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRGXgSIoPFvTJK_3B3viq74PklRMz3eZsoNPYX2zh583yeO5xUSgab_Mk0FUAy7zhH88jYOZLvjdpa8S8zku1xneZgpR93yj10i-55c1W2F6HHbzvGFdAqLxXvrm3K2xFsXuKdwZZDyUIFNQSeIc24rw_6AZa_MMW5-SRTTyKcKdVOP4aL7YfpGo9X7dc/s1600/E24LogowithNadimRazaTV.png", category: "INDIAN" },  
       
+{ name: "8XM", url: "https://vodzong.mjunoon.tv:8087/streamtest/8XM-131/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2tvKILoKF6fHfN8VzPnHasV7i3-NErg23dZvri9XzOcNDrSC9YmMaYDGxIVqwekxWREzJ6eu_nKm5Njz4HHSq4g8xwItvw91PU65-GnQFFn0nBtFyz_QiJW7XKpFnlkkEr1VuFCehfnZYjbVXeCzdpedXflY-jDQiItgOfAQpabbUTShaWTztIxzAeR8/s1600/8XmHDLogowithNadimRazaTV_copy_900x900.png", category: "INDIAN" },  
       
-      
-      { name: "ZOOM", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/zoomin.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPtATyVD6zIHcpWvMlSTz3ZxGJ_7FeK0eLHBvFH7xjZ8fAsdiTghut6akxYyIto-0rMgko3MG9KV7WR7aLVUgJDkfZiN7uTGcuSSf8QBwYKQn0q8H1n3f61LCUHwQsRD-bmi4qsjYHQYKTew6oShZhneanG-iiut4CejY32oASHzd5-iUSJ0LYoKLMYjQ/s1600/BoldMinimalistZoomLogo_copy_900x900.png", category: "INDIAN" },
-      
-      
-      
-      { name: "ZoMusic", url: "https://livecdn.live247stream.com/joomusic/tv/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNpQi9_0P97bAywoLekW2eUBO9OKkCFu3OJw0HPSeYENjhp6Dkntq2Nu2txW40QsAORP330ZK6PRpTezK4mcx4qTtpBoHOHkGkD_YQ5cTlWkIjXsPsHw8QXbHsFQQZXQTRkexNlQOUNkGx-oSZXdKSJxdJ71S6u4qMBCjqydZMASaF2DrXN-dWYmBOmcY/s1600/ModernLogoDesignwithSpeakerIcons_copy_900x900_1.png", category: "INDIAN" },
-      
-      
-      
-      
-      
-    { name: "Masti", url: "https://sabliveyupp.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/sablive_https/mastii/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHslsenwNE5covP96X1eL2TeY4q3qb5S3ee22-MihDxRZqUg2R5gYV9FDUL5EzSjutasFEG5YEvprSBLGzpIg4RqnkRJ5OXQCNgTqXtMIFxq7f9FnWDlv8KhMa50ZZPBqrj5w_2bVkAa1bUFtmZ2wM-66Vn0B6GUINyVUrE4wGFpPbvPqA0rxn3KCk7iQ/s1600/AB-MASTiiiSABGROUPLogo&NadimRazaTV_copy_900x900.png", category: "INDIAN" },  
-      
-      
-      
-      
-        { name: "E24", url: "https://live-e24.dailyhunt.in/eternowsa/live/amlst:E24_,b256,b512,b1024,b1824,.smil/playlist_1824k.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRGXgSIoPFvTJK_3B3viq74PklRMz3eZsoNPYX2zh583yeO5xUSgab_Mk0FUAy7zhH88jYOZLvjdpa8S8zku1xneZgpR93yj10i-55c1W2F6HHbzvGFdAqLxXvrm3K2xFsXuKdwZZDyUIFNQSeIc24rw_6AZa_MMW5-SRTTyKcKdVOP4aL7YfpGo9X7dc/s1600/E24LogowithNadimRazaTV.png", category: "INDIAN" },  
-      
-      
-      
-      
-      
-      { name: "8XM", url: "https://vodzong.mjunoon.tv:8087/streamtest/8XM-131/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2tvKILoKF6fHfN8VzPnHasV7i3-NErg23dZvri9XzOcNDrSC9YmMaYDGxIVqwekxWREzJ6eu_nKm5Njz4HHSq4g8xwItvw91PU65-GnQFFn0nBtFyz_QiJW7XKpFnlkkEr1VuFCehfnZYjbVXeCzdpedXflY-jDQiItgOfAQpabbUTShaWTztIxzAeR8/s1600/8XmHDLogowithNadimRazaTV_copy_900x900.png", category: "INDIAN" },  
-      
-      
-      
-      
-         { name: "Bollywood", url: "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/manifest.m3u8?nadimrazatv", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgn6OM1RPMqODMyu7zr0A8RO7Iho92EDbPEH7vcm4mN00pGe_3tfmxUPLq_ykufvE2RahIvma3OAtz4QEyRyYeu-ydz75KSEc7ZDVjMfoiYA8IT4bVEjjlMPe4EPnUgllQw8dDXFhbcJGip8hj2HbGlpHPzWBet6sP5yTWfFFE1guUrL2gCTFTVYypcR40/s1600/ModernLogoDesignwithBoldTypography_copy_900x900.png", category: "INDIAN" },  
+{ name: "Bollywood", url: "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/manifest.m3u8?nadimrazatv", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgn6OM1RPMqODMyu7zr0A8RO7Iho92EDbPEH7vcm4mN00pGe_3tfmxUPLq_ykufvE2RahIvma3OAtz4QEyRyYeu-ydz75KSEc7ZDVjMfoiYA8IT4bVEjjlMPe4EPnUgllQw8dDXFhbcJGip8hj2HbGlpHPzWBet6sP5yTWfFFE1guUrL2gCTFTVYypcR40/s1600/ModernLogoDesignwithBoldTypography_copy_900x900.png", category: "INDIAN" },  
         
       
-      
-      
-    
-      { name: "Classic ", url: "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-classic/manifest.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgn6OM1RPMqODMyu7zr0A8RO7Iho92EDbPEH7vcm4mN00pGe_3tfmxUPLq_ykufvE2RahIvma3OAtz4QEyRyYeu-ydz75KSEc7ZDVjMfoiYA8IT4bVEjjlMPe4EPnUgllQw8dDXFhbcJGip8hj2HbGlpHPzWBet6sP5yTWfFFE1guUrL2gCTFTVYypcR40/s1600/ModernLogoDesignwithBoldTypography_copy_900x900.png", category: "INDIAN" },  
+{ name: "Classic ", url: "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-classic/manifest.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgn6OM1RPMqODMyu7zr0A8RO7Iho92EDbPEH7vcm4mN00pGe_3tfmxUPLq_ykufvE2RahIvma3OAtz4QEyRyYeu-ydz75KSEc7ZDVjMfoiYA8IT4bVEjjlMPe4EPnUgllQw8dDXFhbcJGip8hj2HbGlpHPzWBet6sP5yTWfFFE1guUrL2gCTFTVYypcR40/s1600/ModernLogoDesignwithBoldTypography_copy_900x900.png", category: "INDIAN" },  
         
       
+{ name: "Cinema", url: "https://live-bhojpuri.akamaized.net/liveabr/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgchyphenhyphenntXTihziGy-H7BehkEiQZE5Cclggwy8X0L0VDeeXmzgUnpryXy9lCKuycienzA3puQDhnG6WN4-f1T-ojkJjWYAaDRS1456xbZ56yjihnI7P8g9os8J-F3b25v1XkiwAcsQCuVfIQE0JL_4cMW3DVZFdKCn0alLIyoBpQGSuS3ul4PQtJfrH-llis/s1600/BhojpuriCinemaComedyLogoDesign_copy_900x900_1.png", category: "INDIAN" },    
       
       
-     
-            { name: "Cinema", url: "https://live-bhojpuri.akamaized.net/liveabr/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgchyphenhyphenntXTihziGy-H7BehkEiQZE5Cclggwy8X0L0VDeeXmzgUnpryXy9lCKuycienzA3puQDhnG6WN4-f1T-ojkJjWYAaDRS1456xbZ56yjihnI7P8g9os8J-F3b25v1XkiwAcsQCuVfIQE0JL_4cMW3DVZFdKCn0alLIyoBpQGSuS3ul4PQtJfrH-llis/s1600/BhojpuriCinemaComedyLogoDesign_copy_900x900_1.png", category: "INDIAN" },    
+{ name: "Ropushi", url: "https://cdn-4.pishow.tv/live/1039/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsAge35-PXO_PGO7CUSiyrE_MeEHtHzRr_GYz7ezZUCCUi5_s5iuoR7-Mrv1zC4usgnDDQzuarRdNTc-ntk7XXI67ueb7m4hP37aIgVafFrkZP3jCwj7jiUQ9BnoVRRq6hTPW5sX10rmQwuq-Obhyphenhyphen-bDauwMOAEvKOwQu3k413WpWUJ_amFYJTVIrE8ww/s1600/RuposhiBanglaLogoDesign_copy_900x900_1.png", category: "INDIAN" },    
       
-      
-      
-      
-      
-            { name: "Ropushi", url: "https://cdn-4.pishow.tv/live/1039/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsAge35-PXO_PGO7CUSiyrE_MeEHtHzRr_GYz7ezZUCCUi5_s5iuoR7-Mrv1zC4usgnDDQzuarRdNTc-ntk7XXI67ueb7m4hP37aIgVafFrkZP3jCwj7jiUQ9BnoVRRq6hTPW5sX10rmQwuq-Obhyphenhyphen-bDauwMOAEvKOwQu3k413WpWUJ_amFYJTVIrE8ww/s1600/RuposhiBanglaLogoDesign_copy_900x900_1.png", category: "INDIAN" },    
-      
-      
-      
-      
+{ name: "Depot", url: "https://byphdgllyk.gpcdn.net/hls/deeptotv/0_1/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGNArpOiSA0kLxr9IgoJVduSywxgQI_ulhqjMk9qQevNJ7OtuCGBQlhtEv5aHPm0pVqKvrQ9-gIa7BPtIeP0NxVnYdKJ3NrT70THgXcalrGdF0iDb_S4ucJd3sVi98XiC8iXrQDsr7zeV-XeeuwGt-9Hzw4IHZLlqJDjjDwpPCTsb1FEg1q2_eqwxDtgs/s1600/NadimRazaTVHDLogoDesign_copy_900x900.png", category: "BANGLA" },
 
-      { name: "Depot", url: "https://byphdgllyk.gpcdn.net/hls/deeptotv/0_1/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGNArpOiSA0kLxr9IgoJVduSywxgQI_ulhqjMk9qQevNJ7OtuCGBQlhtEv5aHPm0pVqKvrQ9-gIa7BPtIeP0NxVnYdKJ3NrT70THgXcalrGdF0iDb_S4ucJd3sVi98XiC8iXrQDsr7zeV-XeeuwGt-9Hzw4IHZLlqJDjjDwpPCTsb1FEg1q2_eqwxDtgs/s1600/NadimRazaTVHDLogoDesign_copy_900x900.png", category: "BANGLA" },
+{ name: "Rajdhani TV", url: "https://iptvbd.live/rajdhanitv/1080.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivjCIfsHlO6Cg2v92-BpWx-f2UPjmmQxqRLBgAC_god5pvJyuyQIhXXWaGrpEg-11PrvQ312X6S0Npb-tWGfuCloQdn5O7sGbpNgLD2WxdPuqyDXELGr8TCSHnR7e5LMmnDHwApsm5MUob_Z0urgfY7wuHoHFdPY0M-a_nJchKyzX6q68mmLhF8uKAWVM/s1600/Rajdhani.tvLogowithBengaliText_copy_900x900_1.png", category: "BANGLA" },
+
+{ name: "Ananda", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhP4yzjaHbB_viVYzig24kwzZ3cOTY6R9CknIPn0LGyFA3tTo7glIhXAVTA6asHNPJButeAs_QwZZzDn5KoVbhUWrmqjBFmhw-4z0gr_jjMuL5Gk5tGlsJLQhwj6dj75iYckRkaxiitEvm1o72ncn9MpAYp3f4huRowa_xPW3KZbmpQUjK4yesK7_QI2Yc/s1600/AnandTVLogoDesign_copy_900x900.png", category: "BANGLA" },
 
       
+{ name: "Movie", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/moviebanglalink2.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQ-dPX0ds4WEGuiUNal8Rs36klrLdjPgl9mbUctBWr8gwcCjqlcUvqCPVxGH1REQKDeqGNaZT0_N2KTbSEYBsTDvjphA4ZpTm6YYQrOiM1zlU9CD7edgCrvvavUBemCMTr5Xu36OTLzkQqUMmn0nTzwdHDJwFaqm9uuycE93iVsUToPPhgopUvYkpr4JY/s1600/MovieBanglaLogoDesign_copy_900x900.png", category: "BANGLA" },
 
-      { name: "Rajdhani TV", url: "https://iptvbd.live/rajdhanitv/1080.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivjCIfsHlO6Cg2v92-BpWx-f2UPjmmQxqRLBgAC_god5pvJyuyQIhXXWaGrpEg-11PrvQ312X6S0Npb-tWGfuCloQdn5O7sGbpNgLD2WxdPuqyDXELGr8TCSHnR7e5LMmnDHwApsm5MUob_Z0urgfY7wuHoHFdPY0M-a_nJchKyzX6q68mmLhF8uKAWVM/s1600/Rajdhani.tvLogowithBengaliText_copy_900x900_1.png", category: "BANGLA" },
+{ name: "MYTV", url: "https://mytvbangla.com/0.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfvUemICDmDqbQrkgHWWsOEaD6ktcAlxKkWBoj37tcHx70h6-ay3tEnJpQT8z31IarPnQp9x9x7oV5FCx9MFhLAtjnzDejK_D-dVbGk9Qo8iNnJ1LYsYDU3vAGjy3lgXxU8Iw8wreNa2FXlfyX56-bFWhgrdz-I5ZbXcCR4NzQYcJZnxVS-QijC3GUfHE/s1600/ColorfulDigitalLogoDesign_copy_900x900.png", category: "BANGLA" },
 
-      
-      
-      
-      
-      
+{ name: "Masranga", url: "https://tvsen5.aynaott.com/tK2BNvT68fHZ/tracks-v1a1/mono.ts.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcSZLFdCOhXu73YHoLQY-Cqd7LKQoK0d-4K_HGPbvulwFaHZ6KQPQv3W-QdXJ82RXG7SWK0EWrHKU4IHkFoZy3LSfrelSZo3GzeYvfkqQS8RKJ9HpYLqwmd1vVKt7QdLp3b5azDXCklBj9RnLtMYRo0QSKz0gVKWQvyeB9wUawK8TCWTJWJlandz4g3-8/s1600/KingfisherLogoforNadimRazaTV_copy_900x900.png", category: "BANGLA" },
 
-      
+{ name: "ChanelA1", url: "https://iptvbd.live/channela1/1080.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAbqwmkTqJ6hZgIO_5cM_QVycG-R6f7g13VnGDhF1TDIe5bWHUOmDPiZOwtSojCOCVwa7oT61RRML0s3f1yYaKxdc12u8fmH8wHSx_aVXDYKMiIA9QEkHwQeMqwSyabJPNLuIV_7UjbPymQGXF_ETodINfLdsCafQhh0jjeRkgqXz6eXU3md-2rhPzxxQ/s1600/ChannelA1LogoDesign_copy_900x900.png", category: "BANGLA" },
 
-      { name: "Ananda", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhP4yzjaHbB_viVYzig24kwzZ3cOTY6R9CknIPn0LGyFA3tTo7glIhXAVTA6asHNPJButeAs_QwZZzDn5KoVbhUWrmqjBFmhw-4z0gr_jjMuL5Gk5tGlsJLQhwj6dj75iYckRkaxiitEvm1o72ncn9MpAYp3f4huRowa_xPW3KZbmpQUjK4yesK7_QI2Yc/s1600/AnandTVLogoDesign_copy_900x900.png", category: "BANGLA" },
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      { name: "Movie", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/moviebanglalink2.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQ-dPX0ds4WEGuiUNal8Rs36klrLdjPgl9mbUctBWr8gwcCjqlcUvqCPVxGH1REQKDeqGNaZT0_N2KTbSEYBsTDvjphA4ZpTm6YYQrOiM1zlU9CD7edgCrvvavUBemCMTr5Xu36OTLzkQqUMmn0nTzwdHDJwFaqm9uuycE93iVsUToPPhgopUvYkpr4JY/s1600/MovieBanglaLogoDesign_copy_900x900.png", category: "BANGLA" },
-
-      
-
-      
-
-      { name: "MYTV", url: "https://mytvbangla.com/0.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfvUemICDmDqbQrkgHWWsOEaD6ktcAlxKkWBoj37tcHx70h6-ay3tEnJpQT8z31IarPnQp9x9x7oV5FCx9MFhLAtjnzDejK_D-dVbGk9Qo8iNnJ1LYsYDU3vAGjy3lgXxU8Iw8wreNa2FXlfyX56-bFWhgrdz-I5ZbXcCR4NzQYcJZnxVS-QijC3GUfHE/s1600/ColorfulDigitalLogoDesign_copy_900x900.png", category: "BANGLA" },
-
-      
-
-      
-     
-      { name: "Masranga", url: "https://tvsen5.aynaott.com/tK2BNvT68fHZ/tracks-v1a1/mono.ts.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcSZLFdCOhXu73YHoLQY-Cqd7LKQoK0d-4K_HGPbvulwFaHZ6KQPQv3W-QdXJ82RXG7SWK0EWrHKU4IHkFoZy3LSfrelSZo3GzeYvfkqQS8RKJ9HpYLqwmd1vVKt7QdLp3b5azDXCklBj9RnLtMYRo0QSKz0gVKWQvyeB9wUawK8TCWTJWJlandz4g3-8/s1600/KingfisherLogoforNadimRazaTV_copy_900x900.png", category: "BANGLA" },
-
-      
-      
-      
-      
-
-    
-
-     { name: "ChanelA1", url: "https://iptvbd.live/channela1/1080.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAbqwmkTqJ6hZgIO_5cM_QVycG-R6f7g13VnGDhF1TDIe5bWHUOmDPiZOwtSojCOCVwa7oT61RRML0s3f1yYaKxdc12u8fmH8wHSx_aVXDYKMiIA9QEkHwQeMqwSyabJPNLuIV_7UjbPymQGXF_ETodINfLdsCafQhh0jjeRkgqXz6eXU3md-2rhPzxxQ/s1600/ChannelA1LogoDesign_copy_900x900.png", category: "BANGLA" },
+{ name: "jamunna", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1701/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEKm4fcnyVheoCCyaMh3RqcF6K5rXsqypr7wYPpTcnso3UndbODp34kuXI_8o_jCL7fGrmqDdm_4h2MVKFfuLQOyJEt0imoL8jTPSF6Klb98HR-xqKgEl3WwU3ZaASw8UIcTg_JcAUIjb41vxDa93MgYkpZaTIEmlbZQSp9um5XhT8jTEcTRZlu7gcTHQ/s1600/JamunaTVandNadimRazaTVLogo_copy_900x900.png", category: "BANGLA" },
 
   
-
-      
-
-      
-
-      
-
-      
-
-      { name: "jamunna", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1701/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEKm4fcnyVheoCCyaMh3RqcF6K5rXsqypr7wYPpTcnso3UndbODp34kuXI_8o_jCL7fGrmqDdm_4h2MVKFfuLQOyJEt0imoL8jTPSF6Klb98HR-xqKgEl3WwU3ZaASw8UIcTg_JcAUIjb41vxDa93MgYkpZaTIEmlbZQSp9um5XhT8jTEcTRZlu7gcTHQ/s1600/JamunaTVandNadimRazaTVLogo_copy_900x900.png", category: "BANGLA" },
-
-  
-
-      
 { name: "Chanel24", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1703/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEHfy4lW6fCl0jInoyzXbQqumBWkqoOOJzlSUMA7g8K8Sh_X6fyDhq03eBy4UJCNvYRwsT2YaGYa1kaNfIHUjDMRqnNNelg9YanS3T5MRtmJfFV9Bcn9CMvB9Y-bCDdei2lil2MClmtVGC4-feZn44_FcHCLchgxR8ucrwh2OsWuXxvHJksYtKBdqLpXE/s1600/SphericalChannel24LogoDesign_copy_900x900.png", category: "BANGLA" },
       
-      
-      
-      
+{ name: "Ekkator", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMc_YC_S98vXV1Fd6-OeHww7gLDjVAF49ZGvxJPawse_8KQAalt4TFKkkGAhBv_kk9THS_wUoKWjHsEk5bv2h3K3cmC04DTHJOrMRrW_krr09FCAePo7XN8X5KspXS2s0icqcrE9-xszLTJF3-LbEHaw4dzVEzkyA1IXQKlEDqUFi_sjzTs4PRT_7IVTE/s1600/EkattorTVHDLogoDesign_copy_900x900.png", category: "BANGLA" },
 
-      
-
-      { name: "Ekkator", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMc_YC_S98vXV1Fd6-OeHww7gLDjVAF49ZGvxJPawse_8KQAalt4TFKkkGAhBv_kk9THS_wUoKWjHsEk5bv2h3K3cmC04DTHJOrMRrW_krr09FCAePo7XN8X5KspXS2s0icqcrE9-xszLTJF3-LbEHaw4dzVEzkyA1IXQKlEDqUFi_sjzTs4PRT_7IVTE/s1600/EkattorTVHDLogoDesign_copy_900x900.png", category: "BANGLA" },
+{ name: "BTV", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYJp-BvjjLu3G3ToDR2jgittB-tzF4QU7bDqxvcQJBx7cQixHbUBdkZoepSWbJqs8WZH2n8VvdPfXaCHmVFmBc6jd_IEfl1TXyfw41EbCnAfs6XFBYyiZ8rHjfTmDgAUCNCIc3BN7Eg4VLE1pCWA6I1YASG_6oEMLLreQuZ8fSI4aIlYWWFJ9m5CG2lys/s1600/BangladeshTelevisionEmblemLogo_copy_900x900.png", category: "BANGLA" },
 
   
+{ name: "RTV", url: "https://tvsen6.aynaott.com/rtv/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEg3lEDJrRmU_tIyYjkATU0hW_i9QODvn_vOhKl70CIEpK9McsFlQQUj3iqQofqJAapD1ABg-TDDd3oD_HWLZaMf9hpuyszujG5Jtd5jwYqhcWmVmIoNc1fPErjmYa21rPynE3YyIMyjhegKoEOfgII8jrBPV0896krHOIkNZeCKlQ9STnZSRyhd8yngk/s1600/ModernRTVLogoDesign_copy_900x900.png", category: "BANGLA" },
 
-      
+{ name: "SATV", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/satvoff5666.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcr__Akekl5kx8CGId46t6K2mjsXZxN-xPCb98S0S0XS5GHsgyGBYZ4S9Hy0IDdUgec1cNcCtuRHk2FJceCrgV7xencCWm7Z_Vu9kUcbB9HZoy9TWucHsOCBGF87-7hiNIprDg29R3EBYPspAk6Wao7eQJZqVkIKYcCKXx8pC_y-ERKVk4MZulKmUdSaA/s1600/SA%E2%80%A2TVandNadimRazaTVLogo_copy_900x900.png", category: "BANGLA" },
 
-      
+{ name: "DeshTV", url: "https://tvsen6.aynaott.com/deshtv/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfnfTILr2F6VWubCw9m-9BJqEWfzuWDN8_XNuYNlFZko8yG7ZYPmQdpIKZ7mnDJezB_fF5FX_XxtDEp286Gk4g_iZX6v84I0g8AbVezdDIBalW_27YU-KtOYsrH30H2Qw7Wy24NHUoPdYsk784H3R0CnakTee7hJBanbavRVvpIfu2YJq0Nmr7brJZuT4/s1600/DeshTVLogowithNadimRazaTV_copy_900x900.png", category: "BANGLA" },
 
-      
+{ name: "AsianTV", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/asian-test-sample-ok-d.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgaD1OgyFg8PGw1acgGq3XT2I8r3KyJ_BHoOv0PuuAD43c3bvBGOJHcCj_029k6i_boNDElRNAlmMwZ0VfyUX9sfbQ52P_SfIWKI9Ai30f9KqwMLFUmOpKics6jaUtY3tCv30HM81IyxseN9v6g8cNXsotwfAFdgjFc8dQLS6RXzBalYSbiYMKWG52HsNE/s1600/AsianTVLogoDesign_copy_900x900.png", category: "BANGLA" },
 
-      
+{ name: "Ekhon", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/globaltv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTSXN8JU_FEfj-xZs6-6xpTcpvt_82Oa7ChvEoG2H_NFpSKIsU8f4DvbGvgs1vLh1S_atRl-_4iJOtFElyJE1nX9S1yk33s392c-gz05EnR66IL99WM566VPYP0K8aVmJ4rc2tpbfhm8UgWVCVE9USI86LBK9k71yFU59sTL61VtLoEOU5GoNxSfmx-p4/s1600/StylizedBengaliLogowithCoin_copy_900x900.png", category: "BANGLA" },
 
-      { name: "BTV", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYJp-BvjjLu3G3ToDR2jgittB-tzF4QU7bDqxvcQJBx7cQixHbUBdkZoepSWbJqs8WZH2n8VvdPfXaCHmVFmBc6jd_IEfl1TXyfw41EbCnAfs6XFBYyiZ8rHjfTmDgAUCNCIc3BN7Eg4VLE1pCWA6I1YASG_6oEMLLreQuZ8fSI4aIlYWWFJ9m5CG2lys/s1600/BangladeshTelevisionEmblemLogo_copy_900x900.png", category: "BANGLA" },
+{ name: "NTV HD", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1716/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgBL8dw8QObd_kn5unTtrFhvOO22HLp-3FtFQViBELpTOZWSI1zObrT03qUujhMO14BDlZY-p-aVidJxIW3t7aNiCuEH66oCVsa_J74GuGQt54rLOKguW_wSCtYt8YMcyPjPq_ChDaxy-mn9wFlRS822YrzGmQm8kbIOQLLNhIgnrVqms-Grc3-mljpI6k/s1600/NadimRazaTVLogoDesign%281%29_1_copy_900x900.png", category: "BANGLA" },
 
-  
+{ name: "METV", url: "https://iptvbd.live/metv1080/1080.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlP74bV_ECM0FtB3ekan2mRhpBFjAg0vF_8tvAQnjcxpU93StSo87YC17Iv09Z4DY7Mit9Iu2uLlvx-hyqorOLSmnPjTbuV1ZFfHxMU-gJFGNtJhMn162b-JwHUkRDf1ke96aYwc3u9pvTvfH08UCKlnCUzdu_WDkYdsYKQ1mf071EsZ3Z05kxFL7BbT0/s1600/MeTVLogowithGreenTriangle_copy_900x900.png", category: "BANGLA" },
 
-      
+{ name: "AmarBangla", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/amarbanglatv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhifuuLKqcaibWpGoKTyadOvMlaPzAvateCAUnOz5QXVC8A2Yf3X4zvRyRrJZDd7YJMaABHGQ3ru4itjhE1yxF8gJxYzNjZ0PosjnUGm86kX5Qhn0uuvn0FzCFl_B4HioyFc6JJUYCEBqt8QFgXXTyH0GNDoA81C-6NWN9eSNcg5A_vTEGDP-HvXIYp-QQ/s1600/AmarBanglaLogoDesign_copy_900x900.png", category: "INDIAN" },
 
-      
+{ name: "PLUS HD", url: "https://live-stream.utkalbongo.com/hls/livebanglatvstream.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEir8DIISD_3Ay4E2H__HTS4VFP7VXskYcIgkufU45epPzAFDKObL2D_p6mOal9B0RJpyaiA3feJuyaL8yvd0x-2nykRjc1pZPwT_aAGwmwFb4bEJf8oVDgty5NF30gzWlwHvh2P2c49pP2P8383ili_yboK1uSyqELcZygHTpSwru1VeK0mMwceugT5QLw/s1600/NadimRazaTVLogoDesign%282%29_copy_900x900_1.png", category: "BANGLA" },
 
-      
+{ name: "Global", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/Global-tv.stream/tracks-v1a1/mono.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTAmFFwQH9uvL61r5TMyKAR1rcy3_9rzI0H5jOV842nF7F9qC6qoZKooUMXGsAo_Tbic189L9I51t2EEDDAJqbUP672AoaR0DqjiiGi_IJlvXzh4186o8-02HRGwbtij-AfhZikCjRqeScGnlIg82F3jmtM3p5SM8RF1mJczXBqff-SrWKe8poPzHTFzo/s1600/NadimRazaTVLogoDesign_copy_900x900.png", category: "BANGLA" },  
 
-      { name: "RTV", url: "https://tvsen6.aynaott.com/rtv/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEg3lEDJrRmU_tIyYjkATU0hW_i9QODvn_vOhKl70CIEpK9McsFlQQUj3iqQofqJAapD1ABg-TDDd3oD_HWLZaMf9hpuyszujG5Jtd5jwYqhcWmVmIoNc1fPErjmYa21rPynE3YyIMyjhegKoEOfgII8jrBPV0896krHOIkNZeCKlQ9STnZSRyhd8yngk/s1600/ModernRTVLogoDesign_copy_900x900.png", category: "BANGLA" },
-
-  
-
-      
-
-      
-
-      
-
-      
-
-      { name: "SATV", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/satvoff5666.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcr__Akekl5kx8CGId46t6K2mjsXZxN-xPCb98S0S0XS5GHsgyGBYZ4S9Hy0IDdUgec1cNcCtuRHk2FJceCrgV7xencCWm7Z_Vu9kUcbB9HZoy9TWucHsOCBGF87-7hiNIprDg29R3EBYPspAk6Wao7eQJZqVkIKYcCKXx8pC_y-ERKVk4MZulKmUdSaA/s1600/SA%E2%80%A2TVandNadimRazaTVLogo_copy_900x900.png", category: "BANGLA" },
-
-  
-
-      
-
-      
-      
-      
-      
-
-      
-
-     { name: "DeshTV", url: "https://tvsen6.aynaott.com/deshtv/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfnfTILr2F6VWubCw9m-9BJqEWfzuWDN8_XNuYNlFZko8yG7ZYPmQdpIKZ7mnDJezB_fF5FX_XxtDEp286Gk4g_iZX6v84I0g8AbVezdDIBalW_27YU-KtOYsrH30H2Qw7Wy24NHUoPdYsk784H3R0CnakTee7hJBanbavRVvpIfu2YJq0Nmr7brJZuT4/s1600/DeshTVLogowithNadimRazaTV_copy_900x900.png", category: "BANGLA" },
-
-      
-
-      
-
-      
-
-      
-
-     { name: "AsianTV", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/asian-test-sample-ok-d.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgaD1OgyFg8PGw1acgGq3XT2I8r3KyJ_BHoOv0PuuAD43c3bvBGOJHcCj_029k6i_boNDElRNAlmMwZ0VfyUX9sfbQ52P_SfIWKI9Ai30f9KqwMLFUmOpKics6jaUtY3tCv30HM81IyxseN9v6g8cNXsotwfAFdgjFc8dQLS6RXzBalYSbiYMKWG52HsNE/s1600/AsianTVLogoDesign_copy_900x900.png", category: "BANGLA" },
-
-      
-
-      
-
-      
-
-      { name: "Ekhon", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/globaltv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTSXN8JU_FEfj-xZs6-6xpTcpvt_82Oa7ChvEoG2H_NFpSKIsU8f4DvbGvgs1vLh1S_atRl-_4iJOtFElyJE1nX9S1yk33s392c-gz05EnR66IL99WM566VPYP0K8aVmJ4rc2tpbfhm8UgWVCVE9USI86LBK9k71yFU59sTL61VtLoEOU5GoNxSfmx-p4/s1600/StylizedBengaliLogowithCoin_copy_900x900.png", category: "BANGLA" },
-
-  
-
-      
-
-      { name: "NTV HD", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1716/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgBL8dw8QObd_kn5unTtrFhvOO22HLp-3FtFQViBELpTOZWSI1zObrT03qUujhMO14BDlZY-p-aVidJxIW3t7aNiCuEH66oCVsa_J74GuGQt54rLOKguW_wSCtYt8YMcyPjPq_ChDaxy-mn9wFlRS822YrzGmQm8kbIOQLLNhIgnrVqms-Grc3-mljpI6k/s1600/NadimRazaTVLogoDesign%281%29_1_copy_900x900.png", category: "BANGLA" },
-
-  
-
-      { name: "METV", url: "https://iptvbd.live/metv1080/1080.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlP74bV_ECM0FtB3ekan2mRhpBFjAg0vF_8tvAQnjcxpU93StSo87YC17Iv09Z4DY7Mit9Iu2uLlvx-hyqorOLSmnPjTbuV1ZFfHxMU-gJFGNtJhMn162b-JwHUkRDf1ke96aYwc3u9pvTvfH08UCKlnCUzdu_WDkYdsYKQ1mf071EsZ3Z05kxFL7BbT0/s1600/MeTVLogowithGreenTriangle_copy_900x900.png", category: "BANGLA" },
-
-      
-
-      
-          { name: "AmarBangla", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/amarbanglatv.stream/playlist.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhifuuLKqcaibWpGoKTyadOvMlaPzAvateCAUnOz5QXVC8A2Yf3X4zvRyRrJZDd7YJMaABHGQ3ru4itjhE1yxF8gJxYzNjZ0PosjnUGm86kX5Qhn0uuvn0FzCFl_B4HioyFc6JJUYCEBqt8QFgXXTyH0GNDoA81C-6NWN9eSNcg5A_vTEGDP-HvXIYp-QQ/s1600/AmarBanglaLogoDesign_copy_900x900.png", category: "INDIAN" },
-
-      
-      
-
-      
-
-      { name: "PLUS HD", url: "https://live-stream.utkalbongo.com/hls/livebanglatvstream.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEir8DIISD_3Ay4E2H__HTS4VFP7VXskYcIgkufU45epPzAFDKObL2D_p6mOal9B0RJpyaiA3feJuyaL8yvd0x-2nykRjc1pZPwT_aAGwmwFb4bEJf8oVDgty5NF30gzWlwHvh2P2c49pP2P8383ili_yboK1uSyqELcZygHTpSwru1VeK0mMwceugT5QLw/s1600/NadimRazaTVLogoDesign%282%29_copy_900x900_1.png", category: "BANGLA" },
-
-  
-
-      
-
-    { name: "Global", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/Global-tv.stream/tracks-v1a1/mono.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTAmFFwQH9uvL61r5TMyKAR1rcy3_9rzI0H5jOV842nF7F9qC6qoZKooUMXGsAo_Tbic189L9I51t2EEDDAJqbUP672AoaR0DqjiiGi_IJlvXzh4186o8-02HRGwbtij-AfhZikCjRqeScGnlIg82F3jmtM3p5SM8RF1mJczXBqff-SrWKe8poPzHTFzo/s1600/NadimRazaTVLogoDesign_copy_900x900.png", category: "BANGLA" },  
-
-      
-
-      
+     
 { name: "NRB HD", url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDDEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFsaWRtaW51aiPhnPTI2/nrb-eu.stream/tracks-v1a1/mono.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjeX0fMKpc_lRfrT6qTXG0iK7ltwilygRaZ61fPX_7T7RHkjdwTIaYDHWSMRVFez2eBnGGnAM3logWZ9f7r7uJGEZQQZfjb3hydOkm9Q2FEULaQHhxJkJqUrOA8xCxdnHEYTNhNoUSXONX48zDINAFHI80edoaKzFHO2TQg4N9ojnbp-Ae3eCX_XuQ-ZOE/s1600/NRBLogoDesignwithColorAccents_copy_900x900.png", category: "BANGLA" },  
       
-
-      
+    
 { name: "BanglaTV", url: "https://tvsen6.aynaott.com/banglatv/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgu7qaSv7IEHayKrmburt8ggOGjNg7nujQ9du3tAs2v0d0cvUnJomuRA-BKaXoqvm6xkKjRDa9vrjVNPp-9-FaEeyzepvfeW0cymNwtLvzLozOzE5v6Vldip0wtXKCq64MZnN1YkipigPqTqe2Uf0aFRIOdY5GcLqDknFi8xAyqjpNz-AXBqkPTeX9nxUo/s1600/BanglaTVLogoDesign_copy_900x900.png", category: "BANGLA" },  
-      
 
-      { name: "Somoy", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYCgcsRHgXpA0wPwSYvoTEbPdVaxO50Q8nF02WzdMlBNxpcHgDhUmEJ3qb-yqIUGYTIecb32wJECeQEs7bJ9zVONg-26DIKkjvESJkeSKYe1qtXkYt8Nz4jE85EFkWUQbHk7oRj_1QgOLQZqxZEbigDfrq8CG0rKoNXVgWplPu8Rw4or6sMhgIQTXIWZE/s1600/BangladeshiNewsChannelLogoDesign_copy_900x900.png", category: "BANGLA" }
+{ name: "WWE HD ", url: "https://smart.bengaldigital.live/WWE/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTcfQZ1Rjj4NkS6w2IORuV9cEMIkjP9xwryq81n9fv7m5GuLYrw-MECn1yi4sou3z8enPJNGVH3xMU8HPofLqiFNOrtHiVMzJqDPfBIeGiOTBfBXeOQFDGggXMGujZQUQj16ybn_iWQM95kV-c7iFWMDPqg6icd4dJdJzvyFDweHZm1GllpYb6z19uaLc/s1600/wwe-logo-png_seeklogo-368682%281%29_copy_900x900.png", category: "INDIAN" },
+
+{ name: "Discovery", url: "https://tvsen6.aynaott.com/discovery_hd_bangla/index.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWn4klBdX6KPWcHsz903jrFZtzLx8lsfoGCVE_L3kdf3dXJHF2DVMHduho9kUgw-ZwE4c1xE657s14PPn0XMJUaxmHhs2s3wE-f7UtBUVa52-gXT5LhogHH3X_7-gk7woT202QqeS8GbBAB68_MFQwMWjIpTKV1aVTaX-quz2nhb1yH7LD2tAz1Z1Gt8M/s1600/images_copy_900x900.png", category: "INDIAN" },
+
+{ name: "CN HD ", url: "https://tvsen5.aynaott.com/cartoonnetwork/index.fmp4.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwZmWCqIUZS3SxKgQXx1Wfrv34HnH1OGc8IWfPXs3wyjG8jEvlFBTM2Wkjmqe73Mt_K3_i231Lviblz0qEnkP_hDZrcnbjMkI-lVMg9NjTdsJ0I_vUW5x5rJpNjx7-KDyQ_FeITM9gj6dpJ3w-519LE7U1xwp9LNMyj5eKvpi8UHZVBNMRXp2GWymru8c/s1600/Cartoon_Network_2010_logo.svg_copy_900x900.png", category: "INDIAN" },
+
+{ name: "Disney Channel", url: "https://live.dinesh29.com.np/stream/livetv/disneychannel/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjl8T5QQp4hfmy2TdyhP8-NLWBcozzeMA_ukJf-EGMaUTBcOC28_YiQ429wxqHgHALJ4pUUWaqZ9tt4kK0b_sGhh2G4ztrAPZvWk0oUrtA3QjgtPKDTt2nUZbdea9KbIiK3xKVHSOkbTKZCscxxrCKAYXQmnQTskX_4jJpB0fUiZnpzG-kO5YkEC4JIED8/s1600/disney-channel_copy_900x900.png", category: "INDIAN" },
+
+
+{ name: "HungamaTV", url: "https://live.dinesh29.com.np/stream/livetv/hungamatv/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1WptUJRe0m8XMOe1z3Ag6kkC6UzR33j_E56DGBaW4SMCEt-JCyb2bTrzOJfZKH-Y2EgatJ4ouxfyiZiJj6MS1Sdi01_qlAOfoDiqmj7j9Nnynoz2QYMTh2Wos7vlHDHzihrjeLQxNS1TbcrTTKPLLn8JJB_LaE8Jv88_PTFxa-IaWDfqvhYlDSL5NZ6w/s1600/hungama-tv_copy_900x900.png", category: "INDIAN" },
+
+{ name: "Nick India", url: "https://live.dinesh29.com.np/stream/livetv/nickindia/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvJLdB7fGCI1kTCj1zrasapUGggeVDeAWgVrUUDEUUof1K13m8ZKdYkztAP6qKwtnzz3pBxpAe8wZsR4yYXagDlJ_3qJARJ1LGzVZUS-cWaQvnuobqHZHuZpM4qjzKLVsxxDO8vFEwJeKCZgIJF8rSJpqzb3Ne2FmiDJoLYu722A0pX1P1UzCIWgw_70A/s1600/nick-india_copy_900x900.png", category: "INDIAN" },
+
+
+{ name: "SuperHungama", url: "https://live.dinesh29.com.np/stream/livetv/disneyxd/master.m3u8", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpaPiE-egHNiEeRPTJiN4-Nj_dKiRX-uTOvkZcyM3ZFa1Tmd8j0eUkjA2UE5fNpguTs7s-I82raPYogNNdpdW_zQNDK5-_hsw0e8euPP8Iibf-qAkhGErUd4ARQtE5l8WlDYaLgQINJ48B7TNEiesj_T2f1CY9TbygDg1vqAqhWprduejNB0bimILp9ro/s1600/disney-xd_copy_900x900.png", category: "INDIAN" },
+
 
     ];
 

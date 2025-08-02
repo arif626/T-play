@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IPTV Player</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    video {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      background: #000;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+    }
+    button {
+      background: #2196f3;
+      border: none;
+      padding: 10px 15px;
+      margin: 10px 5px;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0b7dda;
+    }
+  </style>
+</head>
+<body>
+
+  <video id="video" controls autoplay muted playsinline></video>
+
+  <div>
+    <button onclick="changeChannel('http://103.15.140.138/tsports/index.m3u8')">Sports 1</button>
+    <button onclick="changeChannel('http://192.168.1.117/SONY-SIX/video.m3u8')">Sports 2</button>
+	<button onclick="changeChannel('http://192.168.1.117/Super_sports/video.m3u8')">Sports 3</button>
+	<button onclick="changeChannel('http://ee0c5e74.akadatel.com/iptv/QRDWGTBMDHSDGK/19146/index.m3u8')">Sports 4</button>
+	<button onclick="changeChannel('https://spstr.abntv.live/hls/psstream.m3u8')">Sports 5</button>
+    <button onclick="changeChannel('https://owrcovcrpy.gpcdn.net/bpk-tv/1703/output/1703-audio_113332_eng=113200-video=1692000.m3u8')">Bangla Channel 1</button>
+	<button onclick="changeChannel('https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8')">Bangla Channel 2</button>
+	<button onclick="changeChannel('https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8')">MUSIC</button>
+	<button onclick="changeChannel('https://livecdn.live247stream.com/discoverpakistan/web/playlist.m3u8')">Information Channel 1</button>
+	<button onclick="changeChannel('https://tvsen6.aynaott.com/natgeo/tracks-v1a1/mono.ts.m3u8')">Information Channel 2</button>
+  </div>
+
+  <!-- Load hls.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const video = document.getElementById('video');
+    let hls;
+
+    function changeChannel(url) {
+      if (hls) {
+        hls.destroy();
+        hls = null;
+      }
+
+      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+        video.muted = true; // ensure autoplay on mobile
+        video.play();
+      } else if (Hls.isSupported()) {
+        hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+          video.muted = true; // required for mobile autoplay
+          video.play();
+        });
+      } else {
+        alert('Your browser does not support HLS streaming.');
+      }
+    }
+
+    // Auto-load first channel
+    changeChannel('https://edge3-moblive.yuppcdn.net/drm/smil:tencricketdrm.smil/chunklist_b996000.m3u8');
+  </script>
+
+  <!-- Optional: Disable dev tools -->
+  <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"></script>
+
+</body>
+</html>
